@@ -99,7 +99,7 @@ if __name__ == '__main__':
         assert(make_dict([]), {})
         assert(make_dict(['1', 1, '22', 22, '333', 333, '4444', 4444]),
                {'str': [('1', 1), ('22', 2), ('333', 3), ('4444', 4)],
-                'num': [1, 2, 3, 4]})
+                'num': [1, 22, 333, 4444]})
 
     def test_vector2D():
         zero_vector = Vector2D()
