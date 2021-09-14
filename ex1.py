@@ -1,6 +1,6 @@
 def is_even(a):
     if (a < 0):
-        print("Warning: The number is negative")
+        print("Warning: The number {a} is negative".format(a=a))
     return a % 2 == 0
 
 
@@ -78,14 +78,16 @@ if __name__ == '__main__':
         assert not is_even(-17)
         assert is_even(0)
         assert is_even(12)
-        assert is_even(131)
+        assert not is_even(131)
+        print('is_even correct')
 
     def test_generate_squares():
         assert generate_squares(0, 1) == [0, 1]
         assert generate_squares(-1, 1) == [1, 0, 1]
         assert generate_squares(-5, -5) == [25]
-        assert generate_squares(-5, -4) == []
+        assert generate_squares(5, 4) == []
         assert generate_squares(0, 4) == [0, 1, 4, 9, 16]
+        print('generate_squares correct')
 
     def test_split_list():
         assert split_list([0]) == []
@@ -93,12 +95,14 @@ if __name__ == '__main__':
         assert split_list([-1, 1, 1]) == [-1, 1, 1]
         assert split_list([-1, 0, 1]) == [-1, 1]
         assert split_list([1, 0, 0, 0, 0]), [1]
+        print('split_list correct')
 
     def test_make_dict():
         assert make_dict([1, 2, 3, 4]) == {'str': [], 'num': [1, 2, 3, 4]}
-        assert make_dict([]) == {}
+        assert make_dict([]) == {'str': [], 'num': []}
         assert make_dict(['1', 1, '22', 22, '333', 333, '4444', 4444]) == {'str': [
             ('1', 1), ('22', 2), ('333', 3), ('4444', 4)], 'num': [1, 22, 333, 4444]}
+        print('make_dict correct')
 
     def test_vector2D():
         zero_vector = Vector2D()
@@ -116,8 +120,10 @@ if __name__ == '__main__':
         assert (second - first) == Vector2D(-4, 3)
         assert 5 * first == Vector2D(5, 5)
         assert second * 2 == Vector2D(-6, 8)
+        print('Vector2D correct')
 
-        test_is_even()
-        test_generate_squares()
-        test_split_list()
-        test_make_dict()
+    test_is_even()
+    test_generate_squares()
+    test_split_list()
+    test_make_dict()
+    test_vector2D()
