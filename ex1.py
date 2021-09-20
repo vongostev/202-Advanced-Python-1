@@ -2,16 +2,17 @@ import math
 
 
 def is_even(i):
-    if i < 0: print('The number is negative')
+    if i < 0:
+        print('The number is negative')
     return True if (i % 2 == 0) else False
 
 
 def generate_squares(m1, m2):
-    # if (m1 < 0) or (m2 < 0): return 0
-    if m1 < 0:
-        return 0
     l = []
-    i = math.ceil(math.sqrt(m1))
+    if m1 < 0:
+        i = 0
+    else:
+        i = math.ceil(math.sqrt(m1))
     while not i ** 2 > m2:
         l.append(i ** 2)
         i += 1
@@ -35,7 +36,6 @@ def make_dict(l):
 
 
 class Vector2D:
-    # Параметры возраста и пола имеют значение по умолчанию.
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -77,6 +77,8 @@ class Vector2D:
         return Vector2D(self.x * other, self.y * other)
 
 
-# # print(split_list([1,0,0,2,3,0,0]))
-# print(make_dict([0, 2, 'dsdf', 3, 'asd']))
-# print(Vector2D(2, 3) + Vector2D(1, 3))
+def main():
+    assert is_even(24)
+    # print(generate_squares(-9, 50))
+    # print(split_list([0, 2, 4, 0, 's', 3]))
+    # print(make_dict(['232', 234, 'one', 4, 'e', 2422, 0]))
