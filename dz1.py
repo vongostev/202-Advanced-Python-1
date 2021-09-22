@@ -103,10 +103,10 @@ if __name__ == '__main__':
         second = Vector2D(0, 1)
         assert second.norm() == 1
         assert (first == first)
-        assert (first == second) == False
+        assert if (first == second) is False
         assert (first > second)
-        assert (first < second) == False
-        assert (first <= second) == False
+        assert if (first < second) is False
+        assert if (first <= second) is False
         assert (first >= second)
         assert 5 * first == Vector2D(5, 5)
         assert second * 2 == Vector2D(0, 2)
