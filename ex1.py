@@ -77,8 +77,19 @@ class Vector2D:
         return Vector2D(self.x * other, self.y * other)
 
 
-def main():
-    assert is_even(24)
-    # print(generate_squares(-9, 50))
-    # print(split_list([0, 2, 4, 0, 's', 3]))
-    # print(make_dict(['232', 234, 'one', 4, 'e', 2422, 0]))
+if __name__ == "__main__":
+    assert is_even(-24), "The number is not even"
+    print(generate_squares(0, 10))
+    print(split_list([0, 1, 2, 0, 0, 0, 345, '34', 0, 0, 'sdf', 2]))
+    print(make_dict(['werw', 'werwrrr', 4, 54, 'sdf', 4]))
+    assert Vector2D(0, 4).norm() == 4
+    print(Vector2D(0, 4))
+    assert Vector2D(0, 1) < Vector2D(1, 1)
+    assert Vector2D(2, 1) > Vector2D(1, 1)
+    assert Vector2D(0, 1) <= Vector2D(1, 1)
+    assert Vector2D(1, 1) >= Vector2D(1, 1)
+    assert Vector2D(1, 1) == Vector2D(1, 1)
+    assert Vector2D(0, 1) != Vector2D(1, 1)
+    assert Vector2D(5, 1) + Vector2D(3, 1) == Vector2D(8, 2)
+    assert Vector2D(5, 1) - Vector2D(3, 1) == Vector2D(2, 0)
+    assert Vector2D(0, 1) * 5 == Vector2D(0, 5) == 5 * Vector2D(0, 1)
