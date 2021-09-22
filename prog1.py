@@ -3,11 +3,8 @@ import numpy as np
 
 def is_even(number):
     if number < 0:
-        return 'Error.'
-    elif number % 2 == 0:
-        return True
-    else:
-        return False
+        print(f'Error: {number} is negative')
+    return number % 2 == 0
 
 
 def generate_squares(min_num, max_num):
@@ -30,7 +27,7 @@ def make_dict(some_list):
             l_str.append([some_list[i], len(some_list[i])])
         else:
             l_num.append(some_list[i])
-            return {'str': l_str, 'num': l_num}
+    return {'str': l_str, 'num': l_num}
 
 
 class Vector2D:
@@ -42,7 +39,7 @@ class Vector2D:
         return np.sqrt((self.x)**2+(self.y)**2)
 
     def __str__(self):
-        return ('('+self.x+','+self.y+')')
+        return ('('+str(self.x)+', '+str(self.y)+')')
 
     def __lt__(self, other):
         return (Vector2D.norm(self)) < (Vector2D.norm(other))
@@ -51,7 +48,7 @@ class Vector2D:
         return (Vector2D.norm(self)) <= (Vector2D.norm(other))
 
     def __eq__(self, other):
-        return self is other
+        return self.x == other.x and self.y == other.y
 
     def __ne__(self, other):
         return self is not other
@@ -68,8 +65,63 @@ class Vector2D:
     def __sub__(self, other):
         return Vector2D(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, other):
-        return Vector2D(self.x * other, self.y * other)
+    def __mul__(self, num):
+        return Vector2D(self.x * num, self.y * num)
 
-    def __rmul__(self, other):
-        return Vector2D(self.x * other, self.y * other)
+    def __rmul__(self, num):
+        return Vector2D(self.x * num, self.y * num)
+
+
+if __name__ == '__main__':
+    def test_is_even():
+        assert is_even(-2)
+        assert not is_even(-1)
+        assert is_even(0)
+        assert is_even(2)
+        assert not is_even(1)
+        print('is_even correct')
+
+    def test_generate_squares():
+        assert generate_squares(0, 1) == [0, 1]
+        assert generate_squares(-1, 1) == [1, 0, 1]
+        assert generate_squares(1, 1) == [1]
+        assert generate_squares(10, 1) == []
+        assert generate_squares(0, 3) == [0, 1, 4, 9]
+        print('generate_squares is correct')
+
+    def test_split_list():
+        assert split_list([0]) == []
+        assert split_list([0, 0]) == []
+        assert split_list([1, 0, 1]) == [1, 1]
+        assert split_list([1, 1, 1, 1, 1, 1]) == [1, 1, 1, 1, 1, 1]
+        assert split_list([1, 0, 0, 0]) == [1]
+        print('split_list is correct')
+
+    def test_make_dict():
+        assert make_dict([1, 2, 3]) == {'str': [], 'num': [1, 2, 3]}
+        assert make_dict([]) == {'str': [], 'num': []}
+        assert make_dict(['1', 2, '123', 123, 123, 'asd', '1', 2]) == {
+            'str': [['1', 1], ['123', 3], ['asd', 3], ['1', 1]], 'num': [2, 123, 123, 2]}
+        print('make_dict is correct')
+
+    def test_Vector2D():
+        a = Vector2D(1, 1)
+        b = Vector2D(-4, 0)
+        assert str(a) == '(1, 1)'
+        assert b.norm() == 4
+        assert (a == a)
+        assert not (a == b)
+        assert (a < b)
+        assert not (a > b)
+        assert not (a >= b)
+        assert (a <= b)
+        assert (a + b) == Vector2D(-3, 1)
+        assert (a - b) == Vector2D(5, 1)
+        assert 2 * a == Vector2D(2, 2)
+        assert b * 2 == Vector2D(-8, 0)
+        print('Vector2D is correct')
+    test_is_even()
+    test_generate_squares()
+    test_split_list()
+    test_make_dict()
+    test_Vector2D()
