@@ -1,3 +1,4 @@
+import math
 def is_even(a):
         if a < 0:
             print('(-_-)Вы ввели отрицательное число(-_-)')
@@ -70,6 +71,9 @@ class Vector2D:
 
     def __rmul__(self, n):
         return Vector2D(self.x * n, self.y * n)
+    
+    def isnan(self):
+        return self == self
 
 if __name__ == '__main__':
 
@@ -102,9 +106,9 @@ if __name__ == '__main__':
         first = Vector2D(1, 1)
         second = Vector2D(0, 1)
         assert second.norm() == 1
-        assert (first == first)
+        assert first.isnan()
         assert (first > second)
-        assert (first >= second)
+        assert (first != second)
         assert 5 * first == Vector2D(5, 5)
         assert second * 2 == Vector2D(0, 2)
         assert (first + second) == Vector2D(1, 2)
