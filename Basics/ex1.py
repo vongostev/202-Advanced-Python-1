@@ -110,23 +110,27 @@ if __name__ == "__main__":
     print("Tests for task 4 passed")
     
     # 5
-    x = Vector2D(1, 2)
-    y = Vector2D(2, 3)
-    assert x.norm() == 5 ** 0.5
-    assert y.norm() == 13 ** 0.5
-    assert str(x) == "[1, 2]"
-    assert str(y) == "[2, 3]"
-    assert x < y
-    assert x <= y
-    assert (x == y) is False
-    assert x != y
-    assert (x > y) is False
-    assert (x >= y) is False
+    a = Vector2D(1, 2)
+    b = Vector2D(2, 3)
+    c = Vector2D(3, 4)
+    d = Vector2D(3, 4)
+    e = Vector2D(3, 2)
+    f = Vector2D(2, 1)
+    assert a.norm() == 5 ** 0.5
+    assert b.norm() == 13 ** 0.5
+    assert str(a) == "[1, 2]"
+    assert str(b) == "[2, 3]"
+    assert a < b
+    assert a <= c
+    assert c == d
+    assert a != f
+    assert (b > e) is False
+    assert (f >= d) is False
     print("Tests for task 5 passed")
     
     # 6
-    assert x + y == Vector2D(3, 5)
-    assert y - x == Vector2D(1, 1)
-    assert x * 100 == Vector2D(100, 200)
-    assert 5 * y == Vector2D(10, 15)
+    assert a + b == Vector2D(3, 5)
+    assert d - f == Vector2D(1, 3)
+    assert a * 100 == Vector2D(100, 200)
+    assert 5 * b == Vector2D(10, 15)
     print("Tests for task 6 passed")
