@@ -115,7 +115,7 @@ if __name__ == '__main__':
         assert (first < second)
         assert (first > Vector2D(-1, 0))
         assert (first >= Vector2D(1, 1))
-        assert (first <= second)
+        assert (first <= Vector2D(3, 4))
         assert (first + second) == Vector2D(-2, 5)
         assert (second - first) == Vector2D(-4, 3)
         assert 5 * first == Vector2D(5, 5)
