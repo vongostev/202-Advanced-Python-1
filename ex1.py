@@ -94,7 +94,7 @@ if __name__ == '__main__':
         assert split_list([0, 0, 0]) == []
         assert split_list([-1, 1, 1]) == [-1, 1, 1]
         assert split_list([-1, 0, 1]) == [-1, 1]
-        assert split_list([1, 0, 0, 0, 0]), [1]
+        assert split_list([1, 0, 0, 0, 0]) == [1]
         print('split_list correct')
 
     def test_make_dict():
@@ -110,11 +110,11 @@ if __name__ == '__main__':
         second = Vector2D(-3, 4)
         assert str(zero_vector) == '(0, 0)'
         assert second.norm() == 5
-        assert (first == first)
+        assert (first == Vector2D(1, 1))
         assert (first == second) == False
         assert (first < second)
-        assert (first > second) == False
-        assert (first >= second) == False
+        assert (first > Vector2D(-1, 0))
+        assert (first >= Vector2D(1, 1))
         assert (first <= second)
         assert (first + second) == Vector2D(-2, 5)
         assert (second - first) == Vector2D(-4, 3)
