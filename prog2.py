@@ -1,14 +1,10 @@
 import datetime as DT
 import re
-import requests
 
 def solving():
-    url = 'https://raw.githubusercontent.com/spaghetti322/202-Advanced-Python-1/main/Practicum%201/log.txt'
-    response = requests.get(url)
-    my_lines = list(response.text.splitlines())
     
-    # with open('F:/GitHub/prog-1/202-Advanced-Python-1/Practicum 1/log.txt') as file:
-    #     my_lines = list(file)
+    with open('log.txt') as file:
+        my_lines = list(file)
     
     line = []
     modules = []
@@ -41,7 +37,7 @@ def solving():
             #
             if 'fun:' in my_lines[i]:
                 fun_counter += 1
-        except BaseException:
+        except ValueError:
             continue
     dictionary_list = []
     for i in range(len(modules)):
