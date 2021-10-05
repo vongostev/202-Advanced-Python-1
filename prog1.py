@@ -109,12 +109,12 @@ if __name__ == '__main__':
         b = Vector2D(-4, 0)
         assert str(a) == '(1, 1)'
         assert b.norm() == 4
-        assert (a == a)
+        assert (a == Vector2D(1, 1))
         assert not (a == b)
         assert (a < b)
-        assert not (a > b)
-        assert not (a >= b)
-        assert (a <= b)
+        assert not (a > Vector2D(-4, 0))
+        assert not (a >= Vector2D(-4, 0))
+        assert (a <= Vector2D(-4, 0))
         assert (a + b) == Vector2D(-3, 1)
         assert (a - b) == Vector2D(5, 1)
         assert 2 * a == Vector2D(2, 2)
