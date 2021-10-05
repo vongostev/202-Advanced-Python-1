@@ -1,0 +1,62 @@
+%% LyX 2.3.2-2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[russian]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[koi8-r]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=2cm}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\DeclareRobustCommand{\cyrtext}{%
+  \fontencoding{T2A}\selectfont\def\encodingdefault{T2A}}
+\DeclareRobustCommand{\textcyr}[1]{\leavevmode{\cyrtext #1}}
+
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\section{Распределение фотоотсчетов сжатого вакуума}
+
+Распределение фотоотсчетов при квантовой эффективности (Ctrl+M) $\eta=1$
+определяется формулой: (Ctrl+Shift+M)
+\begin{equation}
+P(n)=\begin{cases}
+\dfrac{\left(\tanh r\right)^{n}}{\cosh r} & n=2k\\
+0 & n=2k+1
+\end{cases},\label{eq:pn}
+\end{equation}
+ где $k=\overline{0\dots\infty}$.
+
+Как видно из формулы (\ref{eq:pn}), все нечетные элементы распределения
+равны нулю \cite{test_bg}.
+
+Нижний индекс делается через знак подчеркивания \_, а верхний ---
+через символ возведения в степень \textasciicircum . Формула ниже
+записывается как \textbackslash sum\_n\textasciicircum m\textbackslash alpha\_n
+
+\begin{equation}
+\sum_{n}^{m}\alpha_{n}
+\end{equation}
+
+В строчных формулах ликс автоматически уменьшает высоту формулы, сдвигая
+индексы влево: $\sum_{n}^{m}\alpha_{n}.$Выравнивание рисунка по центру
+через блок ввода команд Tex (Ctrl+L) \textbackslash centering.
+
+\begin{figure}[H]
+\centering\includegraphics[width=0.5\textwidth]{C:/Users/von.gostev/Pictures/13360-14420.PNG}
+
+\caption{Зависимость квантовой эффективности от длины волны излучения.}
+\end{figure}
+
+\begin{thebibliography}{1}
+\bibitem{test_bg}И. Даль, Словарь русского языка, 1955, М: Мир.
+\end{thebibliography}
+
+\end{document}
