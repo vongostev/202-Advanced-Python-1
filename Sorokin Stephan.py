@@ -88,8 +88,7 @@ class Vector2D:
             first = Vector2D(1, 1)
             second = Vector2D(12, -5)
             assert second.norm() == 13
-            assert (first == zero) == False
-            assert (first == first) == True
+            assert (first == Zero) == False
             assert (first < second) == True
             assert (first > second) == False
             assert (first >= second) == False
