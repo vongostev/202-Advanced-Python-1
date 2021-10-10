@@ -1,15 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import math
 import scipy.special
-
-
-def isint(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False
 
 
 def poisson(лямбда, N):
@@ -21,7 +12,7 @@ def poisson(лямбда, N):
 
 def moment(array, k):
     assert isinstance(k, int), 'k is not int'
-    assert isinstance(array, (list, tuple, np.ndarray))
+    assert isinstance(array, np.ndarray)
     return (array[0] ** k * array[1]).sum()
 
 
