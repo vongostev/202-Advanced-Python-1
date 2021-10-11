@@ -1,0 +1,1 @@
+print('Dear LGTM, please, analyse me')
