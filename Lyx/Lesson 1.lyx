@@ -1,0 +1,226 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "Times New Roman"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style russian
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Распределение фотоотсчетов сжатого вакуума
+\end_layout
+
+\begin_layout Standard
+Распределение фотоотсчетов при квантовой эффективности (Ctrl+M) 
+\begin_inset Formula $\eta=1$
+\end_inset
+
+ определяется формулой: (Ctrl+Shift+M)
+\begin_inset Formula 
+\begin{equation}
+P(n)=\begin{cases}
+\dfrac{\left(\tanh r\right)^{n}}{\cosh r} & n=2k\\
+0 & n=2k+1
+\end{cases},\label{eq:pn}
+\end{equation}
+
+\end_inset
+
+ где 
+\begin_inset Formula $k=\overline{0\dots\infty}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Как видно из формулы 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:pn"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, все нечетные элементы распределения равны нулю 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "test_bg"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Нижний индекс делается через знак подчеркивания _, а верхний — через символ
+ возведения в степень ^.
+ Формула ниже записывается как 
+\backslash
+sum_n^m
+\backslash
+alpha_n
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\sum_{n}^{m}\alpha_{n}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+В строчных формулах ликс автоматически уменьшает высоту формулы, сдвигая
+ индексы влево: 
+\begin_inset Formula $\sum_{n}^{m}\alpha_{n}.$
+\end_inset
+
+Выравнивание рисунка по центру через блок ввода команд Tex (Ctrl+L) 
+\backslash
+centering.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+centering
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/von.gostev/Pictures/13360-14420.PNG
+	lyxscale 50
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Зависимость квантовой эффективности от длины волны излучения.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "test_bg"
+literal "false"
+
+\end_inset
+
+И.
+ Даль, Словарь русского языка, 1955, М: Мир.
+\end_layout
+
+\end_body
+\end_document
