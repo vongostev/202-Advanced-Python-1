@@ -1,5 +1,4 @@
 def is_even(i):
-def is_even(i):
     if (i < 0):
         print("Warning: negative number")
     return i % 2 == 0
@@ -75,7 +74,7 @@ if __name__ == "__main__":
     #make_dict_test():
         assert make_dict([]) == {'str': [], 'num': []}
         assert make_dict([1, 2, 3, 4]) == {'str': [], 'num': [1, 2, 3, 4]}
-        assert make_dict(['1', 1, '2', 2, '3', 3, '4', -4]) == {'str': [('1', 1), ('2', 2), ('3', 3), ('4', -4)], 'num': [1, 2, 3, -4]}
+        assert make_dict(['1', 1, '2', 2, '3', 3, '4', -4]) == {'str': [('1', 1), ('2', 1), ('3', 1), ('4', 1)], 'num': [1, 2, 3, -4]}
         print('make_dict checked')
 
     #vector2D_test():
