@@ -95,8 +95,8 @@ class Vector2D:
             assert (first <= second) == True
             print('Vector2D checked')
     
-            is_even_test()
-            generate_squares_test()
-            split_list_test()
-            make_dict_test()
-            vector2D_test()
+    is_even_test()
+    generate_squares_test()
+    split_list_test()
+    make_dict_test()
+    vector2D_test()
