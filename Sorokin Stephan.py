@@ -5,7 +5,7 @@ def is_even(i):
 
 def generate_squares(min_num, max_num):
     L = []
-    for j in range(min_num, max_num + 1):
+    for i in range(min_num, max_num + 1):
         L.append(i * i)
     return L
 
