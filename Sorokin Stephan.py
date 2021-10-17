@@ -23,30 +23,35 @@ def make_dict(L):
             D['num'].append(elem)
     return D
 
-def norm(self):
-    return (self.x ** 2 + self.y ** 2) ** (1/2)
+class Vector2D:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
 
-def __str__(self):
-    return '{' + str(self.x) + ';' + str(self.y) + '}'
+    def norm(self):
+        return (self.x ** 2 + self.y ** 2) ** (1/2)
 
-def __lt__(self, other):
-    return self.norm() < other.norm()
+    def __str__(self):
+        return '{' + str(self.x) + ';' + str(self.y) + '}'
 
-def __le__(self, other):
-    return self.norm() <= other.norm()
+    def __lt__(self, other):
+        return self.norm() < other.norm()
 
-def __eq__(self, other):
-    return self.x == other.x and self.y == other.y
+    def __le__(self, other):
+        return self.norm() <= other.norm()
 
-def __ne__(self, other):
-    return not self == other
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
 
-def __gt__(self, other):
-    return not self <= other
+    def __ne__(self, other):
+        return not self == other
 
-def __ge__(self, other):
-    return not self < other
-    
+    def __gt__(self, other):
+        return not self <= other
+
+    def __ge__(self, other):
+        return not self < other
+
 if __name__ == "__main__":
     #is_even_test():
         assert is_even(-240) is True
@@ -55,7 +60,7 @@ if __name__ == "__main__":
         assert is_even(12) is True
         assert is_even(131) is False
         print('is_even checked')
-        
+
     #generate_squares_test():
         assert generate_squares(0, 1) == [0, 1]
         assert generate_squares(-2, 1) == [4, 1, 0, 1]
@@ -63,7 +68,7 @@ if __name__ == "__main__":
         assert generate_squares(-2, -3) == []
         assert generate_squares(3, 6) == [9, 16, 25, 36]
         print('generate_squares checked')
-        
+
     #split_list_test():
         assert split_list([]) == []
         assert split_list([-1, 1, 1, 0]) == [-1, 1, 1]
