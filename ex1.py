@@ -1,12 +1,7 @@
 def is_even(arg):
-
-    if(arg <= 0):
-        print("Число должно быть положительным")
-        return(False)
-    if (arg % 1 != 0):
-        print("Число должно быть натуральным")
-        return(False)
-
+    
+    assert arg<=0, "Число должно быть положительным"
+    assert arg % 1 != 0, "Число должно быть натуральным"
     return (arg % 2 == 0)
 
 
@@ -115,7 +110,7 @@ def test_vector2D():
     zero_vector = Vector2D()
     first = Vector2D(1, 2)
     second = Vector2D(-3, 4)
-    assert(zero_vector == '(0, 0)')
+    assert(str(zero_vector) == '(0, 0)')
     assert(second.norm() == 5)
     assert first == Vector2D(1, 2) == True
     assert(first == second) == False
