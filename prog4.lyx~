@@ -1,0 +1,234 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Шредингер вывел свое релятивистское волновое уравнение, заметив, что гамильтониа
+н 
+\begin_inset Formula $H$
+\end_inset
+
+ и импульс 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+ "электрона Лоренца" с массой 
+\begin_inset Formula $m$
+\end_inset
+
+ и зарядом 
+\begin_inset Formula $e$
+\end_inset
+
+, находящегося во внешнем векторном потенциале 
+\begin_inset Formula $\text{\textbf{А}}$
+\end_inset
+
+ и кулоновском потенциале 
+\begin_inset Formula $\phi$
+\end_inset
+
+ связаны следующим соотношением 
+\begin_inset Formula $\left.^{1}\right)$
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+0=(H+e\phi)^{2}-c^{2}(\boldsymbol{p}-e\boldsymbol{\text{\textbf{А}}}/c)^{2}-m^{2}c^{4}
+\]
+
+\end_inset
+
+Соотношения де Бройля 
+\begin_inset Formula $(1.1.1)$
+\end_inset
+
+ для 
+\shape italic
+свободной 
+\shape default
+частицы, представленной плоской волной 
+\begin_inset Formula $\exp\{2\pi i(\boldsymbol{\kappa}\cdot\boldsymbol{x}-\nu t)\}$
+\end_inset
+
+, можно получить, если произвести отождествление 
+\begin_inset Formula 
+\[
+\boldsymbol{p}=h\boldsymbol{k}\rightarrow-i\hbar\nabla,\qquad E=h\nu\rightarrow i\hbar\frac{\partial}{\partial t}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+где 
+\begin_inset Formula $\hbar-$
+\end_inset
+
+удобное обозначение (введенное Дираком) для 
+\begin_inset Formula $h/2\pi$
+\end_inset
+
+.
+ Исходя из чисто формально аналогии Шредингер предположил, что электрон
+ во внешних полях 
+\begin_inset Formula $\text{\textbf{А}}$
+\end_inset
+
+, 
+\begin_inset Formula $\phi$
+\end_inset
+
+ должен описываться волновой функцией 
+\begin_inset Formula $\psi(\boldsymbol{x},t)$
+\end_inset
+
+, удовлетворяющей уравнению, получаемому при помощи той же самой замены
+ в 
+\begin_inset Formula $(1.1.2):$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+0=\left[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)^{2}-c^{2}\left(-i\hbar+\frac{e\text{\textbf{А}}}{c}\right)^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x},t).
+\]
+
+\end_inset
+
+В частности, для стационарных состояний в атоме водорода справедливы равенства
+ 
+\begin_inset Formula $\text{\textbf{А}}=0$
+\end_inset
+
+ и 
+\begin_inset Formula $\phi=e/\left(4\pi r\right).$
+\end_inset
+
+ Кроме того, в этом случае 
+\begin_inset Formula $\psi$
+\end_inset
+
+ зависит от времени 
+\begin_inset Formula $t$
+\end_inset
+
+ экспоненциально: 
+\begin_inset Formula $\exp\left(-iEt/\hbar\right)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\phi$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+0=\left[\left(E+\frac{e^{2}}{4\pi r}\right)^{2}-c^{2}\hbar^{2}\nabla^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x}).
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Решение уравнения 
+\begin_inset Formula $(1.1.5)$
+\end_inset
+
+ с наложенными на них разумными граничными условиями, определяют уровни
+ энергии 
+\begin_inset Formula $\left[9\right]$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+E=mc^{2}\left[1-\frac{\alpha^{2}}{2n^{2}}-\frac{\alpha^{4}}{2n^{4}}\left(\frac{n}{l+1/2}-\frac{3}{4}\right)+\dots\right]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
