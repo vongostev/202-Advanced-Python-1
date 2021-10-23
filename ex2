@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Oct 23 06:01:50 2021
+
+@author: grego
+"""
+
+
+def is_date(inp_str):
+    inp = inp_str.split('-')
+    if len(inp) == 3:
+        for element in inp:
+            if element.isdigit() == False:
+                return(False)
+        return(True)
+    else:
+        return(False)
+
+
+def is_type(inp_str):
+    types = ('[DEBUG', "[INFO", '[WARNING', '[ERROR')
+    if types.count(inp_str):
+        return True
+    else:
+        return False
+
+
+def test_structure(inp_list):  # date time - module [ type ] message
+    if (is_date(inp_list[0])
+            and inp_list[2] == '-'
+            and is_type(inp_list[4])
+            and inp_list[5] == ']'
+        ):
+        return True
+    return False
+
+
+def analyze_file(file, fun):
+    dic = {}
+    num_of_fun = 0
+    for line in file:
+        buff = line.split()
+        if test_structure(buff):
+            divided = buff[0:4] + list('[') + (buff[4]
+                                               [1:len(buff[4])]).split() + buff[5:len(buff)]
+            # страшная строчка в которой мы "[Debug" -> "[","Debug"
+            if dic.get(divided[3], -1) == -1:
+                dic[divided[3]] = {'DEBUG': 0,
+                                   "INFO": 0, 'WARNING': 0, 'ERROR': 0}
+            dic[divided[3]][divided[5]] = dic[divided[3]][divided[5]] + 1
+        if line.rfind(fun) > -1:
+            num_of_fun += line.rfind(fun) - line.find(fun) + 1
+    return((dic, num_of_fun))
+
+
+if __name__ == '__main__':
+
+    file = open("log.txt", "r")
+    searched_phrase = 'fun:'
+    dictionary = analyze_file(file, searched_phrase)
+    print("Dictionary:", dictionary[0], '\n')
+    print("How many phrases found?", dictionary[1])
+    file.close()
