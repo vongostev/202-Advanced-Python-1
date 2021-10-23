@@ -1,8 +1,10 @@
 def is_even(arg):
-    
-    assert arg<=0, "Число должно быть положительным"
-    assert arg % 1 != 0, "Число должно быть натуральным"
-    return (arg % 2 == 0)
+    if arg > 0:
+        print("number must be not negative")
+    if (arg % 2) == 0:
+        return True
+    else:
+        return False
 
 
 def generate_squares(min_num, max_num):
@@ -78,9 +80,9 @@ class Vector2D:
 
 
 def test_is_even():
-    assert is_even(-240) == False
+    assert is_even(-240) == True
     assert is_even(-17) == False
-    assert is_even(0) == False
+    assert is_even(0) == True
     assert is_even(12) == True
     assert is_even(131) == False
 
@@ -131,4 +133,3 @@ if __name__ == "__main__":
     test_split_list()
     test_make_dict()
     test_vector2D()
-
