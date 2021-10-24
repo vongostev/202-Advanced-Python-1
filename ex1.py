@@ -1,9 +1,9 @@
 def is_even(arg):
-    if arg > 0:
+   if arg > 0:
         print("number must be not negative")
-    if (arg % 2) == 0:
+   if (arg % 2) == 0:
         return True
-    else:
+   else:
         return False
 
 
@@ -114,7 +114,7 @@ def test_vector2D():
     second = Vector2D(-3, 4)
     assert(str(zero_vector) == '(0, 0)')
     assert(second.norm() == 5)
-    assert first == Vector2D(1, 2) == True
+    assert (first == Vector2D(1, 2)) == True
     assert(first == second) == False
     assert(first < second) == True
     assert(first > second) == False
@@ -124,7 +124,6 @@ def test_vector2D():
     assert(second - first) == Vector2D(-4, 2)
     assert(first * 5) == Vector2D(5, 10)
     assert(5 * first) == Vector2D(5, 10)
-    assert(Vector2D.dotproduct(first, second)) == Vector2D(-3, 8)
 
 
 if __name__ == "__main__":
@@ -133,3 +132,4 @@ if __name__ == "__main__":
     test_split_list()
     test_make_dict()
     test_vector2D()
+
