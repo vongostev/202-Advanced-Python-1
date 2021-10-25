@@ -26,31 +26,34 @@ def is_type(inp_str):
 
 
 def test_structure(inp_list):  # date time - module [ type ] message
-    if (is_date(inp_list[0])
-            and inp_list[2] == '-'
-            and is_type(inp_list[4])
-            and inp_list[5] == ']'
-        ):
+    if is_date(inp_list[0]) and inp_list[2] == '-'  and is_type(inp_list[4]) and inp_list[5] == ']':
         return True
     return False
+
+
+def find_modes(line):
+    first = line.find('Found') + len("Found") + 1 #if bad first = 5
+    last = line.find('modes')-1                   #if bad last = -2
+    if first != 5 and last !=-2:
+        return line[first:last]
 
 
 def analyze_file(file, fun):
     dic = {}
     num_of_fun = 0
+    list_of_modes = []
     for line in file:
         buff = line.split()
+        if find_modes(line): list_of_modes.append(find_modes(line))
         if test_structure(buff):
-            divided = buff[0:4] + list('[') + (buff[4]
-                                               [1:len(buff[4])]).split() + buff[5:len(buff)]
-            # страшная строчка в которой мы "[Debug" -> "[","Debug"
+            divided = [*buff[0:4], '[', buff[4][1:], buff[5:]]
             if dic.get(divided[3], -1) == -1:
                 dic[divided[3]] = {'DEBUG': 0,
                                    "INFO": 0, 'WARNING': 0, 'ERROR': 0}
             dic[divided[3]][divided[5]] = dic[divided[3]][divided[5]] + 1
         if line.rfind(fun) > -1:
             num_of_fun += line.rfind(fun) - line.find(fun) + 1
-    return((dic, num_of_fun))
+    return((dic, num_of_fun, list_of_modes))
 
 
 if __name__ == '__main__':
@@ -59,5 +62,6 @@ if __name__ == '__main__':
     searched_phrase = 'fun:'
     dictionary = analyze_file(file, searched_phrase)
     print("Dictionary:", dictionary[0], '\n')
-    print("How many phrases found?", dictionary[1])
+    print("How many phrases found?", dictionary[1], '\n')
+    print("Number of found modes?", dictionary[2])
     file.close()
