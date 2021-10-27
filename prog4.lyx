@@ -107,17 +107,23 @@
 
 
 \begin_inset Formula 
-\[
-0=(H+e\phi)^{2}-c^{2}(\boldsymbol{p}-e\boldsymbol{\text{\textbf{А}}}/c)^{2}-m^{2}c^{4}
-\]
+\begin{equation}
+0=(H+e\phi)^{2}-c^{2}(\boldsymbol{p}-e\boldsymbol{\text{\textbf{А}}}/c)^{2}-m^{2}c^{4}\label{eq:1.1.2}
+\end{equation}
 
 \end_inset
 
-Соотношения де Бройля 
-\begin_inset Formula $(1.1.1)$
+соотношения 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.2"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- для 
+ де Бройля для 
 \shape italic
 свободной 
 \shape default
@@ -127,14 +133,10 @@
 
 , можно получить, если произвести отождествление 
 \begin_inset Formula 
-\[
-\boldsymbol{p}=h\boldsymbol{k}\rightarrow-i\hbar\nabla,\qquad E=h\nu\rightarrow i\hbar\frac{\partial}{\partial t}
-\]
+\begin{equation}
+\boldsymbol{p}=h\boldsymbol{k}\rightarrow-i\hbar\nabla,\qquad E=h\nu\rightarrow i\hbar\frac{\partial}{\partial t}\label{eq:1.1.3}
+\end{equation}
 
-\end_inset
-
-
-\begin_inset Newline newline
 \end_inset
 
 где 
@@ -161,14 +163,20 @@
 
 , удовлетворяющей уравнению, получаемому при помощи той же самой замены
  в 
-\begin_inset Formula $(1.1.2):$
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.3"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
- 
+:
 \begin_inset Formula 
-\[
-0=\left[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)^{2}-c^{2}\left(-i\hbar+\frac{e\text{\textbf{А}}}{c}\right)^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x},t).
-\]
+\begin{equation}
+0=\left[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)^{2}-c^{2}\left(-i\hbar+\frac{e\text{\textbf{А}}}{c}\right)^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x},t).\label{eq:1.1.4}
+\end{equation}
 
 \end_inset
 
@@ -200,18 +208,20 @@
 
  
 \begin_inset Formula 
-\[
-0=\left[\left(E+\frac{e^{2}}{4\pi r}\right)^{2}-c^{2}\hbar^{2}\nabla^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x}).
-\]
+\begin{equation}
+0=\left[\left(E+\frac{e^{2}}{4\pi r}\right)^{2}-c^{2}\hbar^{2}\nabla^{2}-m^{2}c^{4}\right]\psi(\boldsymbol{x}).\label{eq:1.1.5}
+\end{equation}
 
-\end_inset
-
-
-\begin_inset Newline newline
 \end_inset
 
 Решение уравнения 
-\begin_inset Formula $(1.1.5)$
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.5"
+plural "false"
+caps "false"
+noprefix "false"
+
 \end_inset
 
  с наложенными на них разумными граничными условиями, определяют уровни
@@ -221,9 +231,9 @@
 
  
 \begin_inset Formula 
-\[
-E=mc^{2}\left[1-\frac{\alpha^{2}}{2n^{2}}-\frac{\alpha^{4}}{2n^{4}}\left(\frac{n}{l+1/2}-\frac{3}{4}\right)+\dots\right]
-\]
+\begin{equation}
+E=mc^{2}\left[1-\frac{\alpha^{2}}{2n^{2}}-\frac{\alpha^{4}}{2n^{4}}\left(\frac{n}{l+1/2}-\frac{3}{4}\right)+\dots\right]\label{eq:1.1.6}
+\end{equation}
 
 \end_inset
 
