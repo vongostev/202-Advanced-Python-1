@@ -1,39 +1,40 @@
 def is_even(a):
+
     if (a < 0):
+
         print("minus tut kak tut")
-    if (a % 2) == 0:
-        return True
-    if (a % 2) == 1:
-        return False
+
+    return (a % 2) == 0
 
 
 def generate_squares(min_num, max_num):
-    kvad = []
+    q = []
     for i in range(min_num, max_num + 1):
-        kvad.append(i * i)
-    return kvad
+        q.append(i * i)
+    return q
 
 
-def split_list(kvad):
-    mass = []
-    for elem in kvad:
+def split_list(q):
+    m = []
+    for elem in q:
         if elem != 0:
-            mass.append(elem)
-    return mass
+            m.append(elem)
+    return m
 
 
-def make_dict(kvad):
-    stroka = []
+def make_dict(q):
+    str_ = []
     number = []
-    for elem in kvad:
+    for elem in q:
         if isinstance(elem, int):
             number.append(elem)
         else:
-            stroka.append((elem, len(elem)))
-    return {'str':  stroka, 'num': number}
+            str_.append((elem, len(elem)))
+    return {'str':  str_, 'num': number}
 
 
 class Vector2D:
+
     def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
@@ -42,7 +43,7 @@ class Vector2D:
         return (self.x ** 2 + self.y ** 2) ** (1 / 2)
 
     def __str__(self):
-        return '({x}, {y})'.format(x = self.x, y = self.y)
+        return '({x}, {y})'.format(x=self.x, y=self.y)
 
     def __lt__(self, other):
         return self.norm() < other.norm()
@@ -74,9 +75,6 @@ class Vector2D:
     def __rmul__(self, n):
         return Vector2D(self.x * n, self.y * n)
 
-
-if __name__ == '__main__':
-
     def test_is_even():
         assert is_even(-240) == True
         assert is_even(-17) == False
@@ -100,7 +98,8 @@ if __name__ == '__main__':
         print('split_list correct')
 
     def test_make_dict():
-        assert make_dict([1, 2, 3, 4, 5]) == {'str': [], 'num': [1, 2, 3, 4, 5]}
+        assert make_dict([1, 2, 3, 4, 5]) == {
+            'str': [], 'num': [1, 2, 3, 4, 5]}
         assert make_dict([]) == {'str': [], 'num': []}
         assert make_dict(['1', 1, '22', 22, '333', 333, '4444', 4444]) == {'str': [
             ('1', 1), ('22', 2), ('333', 3), ('4444', 4)], 'num': [1, 22, 333, 4444]}
@@ -124,8 +123,11 @@ if __name__ == '__main__':
         assert second * 2 == Vector2D(-24, 10)
         print('Vector2D correct')
 
-    test_is_even()
-    test_generate_squares()
-    test_split_list()
-    test_make_dict()
-    test_vector2D()
+    if __name__ == '__main__':
+
+        test_is_even()
+        test_generate_squares()
+        test_split_list()
+        test_make_dict()
+        test_vector2D()
+
