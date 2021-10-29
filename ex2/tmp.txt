@@ -1,0 +1,1 @@
+2021-06-30 18:39:45,180 - Code.pyMMF [DEBUG  ]  Debug mode ON.
