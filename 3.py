@@ -1,44 +1,37 @@
 import numpy as np
-from scipy.special import factorial
 import matplotlib.pyplot as plt
+import scipy.special
 
 
-def poisson(lambda_, N):
-    if lambda_ < 0:
-        raise IOError("Лямбда меньше 0")
-    n = np.arange(0, N + 1)
-    e = np.exp(1)
-    p = (lambda_ ** n) * (e ** (-lambda_)) / factorial(n)
-    return np.array([n, p])
+def poisson(lambda_, n):
+    assert lambda_ >= 0, '"Лямбда не должно быть меньше 0"'
+    a = np.arange(n)
+    b = lambda_ ** a * np.exp(-lambda_) / scipy.special.factorial(a)
+    return a, b
 
+def average(a, b):
+    return moment(a, b, 1)
 
-def moment(arr, k):
-    if not isinstance(arr, np.ndarray) or not isinstance(k, int) or k < 0:
-        raise IOError("Неправильные значения для момента")
-    return np.sum(arr[0] ** k * arr[1])
+def dispersion(a, b):
+    return average((a - average(a, b)) ** 2, b)
 
+def moment(a, b, k):
+    assert isinstance(k, int), 'k не int'
+    assert isinstance(a, np.ndarray)
+    assert isinstance(b, np.ndarray)
+    return (a ** k * b).sum()
 
-def expected_value(arr):
-    if not isinstance(arr, np.ndarray):
-        raise IOError("Неправильные значения для мат ожидания")
-    return moment(arr, 1)
+lambda_ = 4
+k = 2
 
+n = 50
+a, b = poisson(lambda_, n)
 
-def dispersion(arr):
-    if not isinstance(arr, np.ndarray):
-        raise IOError("Неправильные значения для дисперсии")
-    arr[0] = (arr[0] - expected_value(arr)) ** 2
-    return expected_value(arr)
+plt.plot(a, b)
+plt.show()
 
+print(moment(a, b, k))
+print(average(a, b))
+print(dispersion(a, b))
 
-if __name__ == '__main__':
-    lambda_ = 4
-    N = 1111
-    k = 2
-    p = poisson(lambda_, N)
-    average_expected_value_fan = expected_value(p)
-    average_dispersion_enjoyer = dispersion(p)
-    assert np.allclose([average_expected_value_fan,
-                        average_dispersion_enjoyer], [lambda_, lambda_], 1e-3)
-    plt.plot(p[1])
-    plt.xlim(-1,50)
+assert np.allclose([average(a, b), dispersion(a, b)], [lambda_, lambda_], 1e-3)
