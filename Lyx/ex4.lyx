@@ -1,0 +1,423 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style russian
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section*
+\begin_inset Formula $\S1.1.$
+\end_inset
+
+ Релятивистская волновая механика
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+sloppy
+\end_layout
+
+\end_inset
+
+опубликовать свое релятивистское волновое уравнение, оно уже было независимо
+ переоткрыто Оскаром Клейном 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-2"
+literal "false"
+
+\end_inset
+
+ и Вальтером Гордоном 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "key-3"
+literal "false"
+
+\end_inset
+
+.
+ По этой причине релятивистский вариант называется 
+\begin_inset Quotes eld
+\end_inset
+
+уравнением Клейна-Гордона
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Шредингер вывел свое релятивистское волновое уравнение, заметив, что гамильтониа
+н 
+\begin_inset Formula $H$
+\end_inset
+
+ и импульс 
+\begin_inset Formula $\text{\textbf{p}}$
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+электрона Лоренца
+\begin_inset Quotes erd
+\end_inset
+
+ с массой 
+\begin_inset Formula $m$
+\end_inset
+
+ и зарядом 
+\begin_inset Formula $e$
+\end_inset
+
+, находящегося во внешнем векторном потенциале 
+\begin_inset Formula $\text{\textbf{A}}$
+\end_inset
+
+ и кулоновском потенциале 
+\begin_inset Formula $\phi$
+\end_inset
+
+, связаны следующим соотношением 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Это соотношение лоренц-инвариантно, поскольку величины 
+\begin_inset Formula $\text{\textbf{A}}$
+\end_inset
+
+ и 
+\begin_inset Formula $\phi$
+\end_inset
+
+ при преобразованиях Лоренца изменяются точно так же, как 
+\begin_inset Formula $c\text{\textbf{p}}$
+\end_inset
+
+ и 
+\begin_inset Formula $E$
+\end_inset
+
+ соответственно.
+ Гамильтониан 
+\begin_inset Formula $H$
+\end_inset
+
+ и импульс 
+\begin_inset Formula $\text{\textbf{p}}$
+\end_inset
+
+ Шредингер представлял в виде частных производных действия, однако это неважно
+ для нашего рассмотрения.
+ 
+\end_layout
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+0=\left(H+e\phi\right)^{2}-c^{2}\left(\text{\textbf{p}}+e\text{\textbf{A}}/c\right)^{2}-m^{2}c^{4}.\label{eq:1.1.2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Соотношения де Бройля для 
+\shape italic
+свободной 
+\shape default
+частицы, представленной плоской волной 
+\begin_inset Formula $\exp\left\{ 2\pi i\left(\boldsymbol{\kappa}\cdot\text{\textbf{x}}-\nu t\right)\right\} $
+\end_inset
+
+, можно получить, если произвести отождествление
+\begin_inset Formula 
+\begin{equation}
+\text{\textbf{p}}=h\text{\textbf{k}}\rightarrow i\hbar\nabla,\qquad E=h\nu\rightarrow i\hbar\frac{\partial}{\partial t},\label{eq:1.1.3}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+где 
+\begin_inset Formula $\hbar$
+\end_inset
+
+ — удобное обозначение (введенное Дираком) для 
+\begin_inset Formula $h/2\pi$
+\end_inset
+
+.
+ Исходя из чисто формальной аналогии Шредингер предположил, что электрон
+ во внешних полях 
+\begin_inset Formula $\text{\textbf{A}},\,\phi$
+\end_inset
+
+ должен описываться волновой функцией 
+\begin_inset Formula $\psi\left(\text{\textbf{x}},t\right),$
+\end_inset
+
+ удовлетворяющей уравнению, получаемому при помощи той же самой замены в
+ 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+0=\left[\left(i\hbar\frac{\partial}{\partial t}+e\phi\right)^{2}-c^{2}\left(-i\hbar\nabla+\frac{e\text{\textbf{A}}}{c}\right)^{2}-m^{2}c^{4}\right]\psi\left(\text{\textbf{x}},t\right).\label{eq:1.1.4}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+В частности, для стационарных состояний в атоме водорода справедливы равенства
+ 
+\begin_inset Formula $\text{\textbf{A}}=0$
+\end_inset
+
+ и 
+\begin_inset Formula $\phi=e/\left(4\pi r\right)$
+\end_inset
+
+.
+ Кроме того, в этом случае 
+\begin_inset Formula $\psi$
+\end_inset
+
+ зависит от времени 
+\begin_inset Formula $t$
+\end_inset
+
+ экспоненциально: 
+\begin_inset Formula $\exp\left(-iEt/\hbar\right)$
+\end_inset
+
+.
+ Поэтому 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.4"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ сводится к уравнению
+\begin_inset Formula 
+\begin{equation}
+0=\left[\left(E+\frac{e^{2}}{4\pi r}\right)^{2}-c^{2}\hbar^{2}\nabla^{2}-m^{2}c^{4}\right]\psi\left(\text{\textbf{x}}\right).\label{eq:1.1.5}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Решения уравнения 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:1.1.5"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ с наложенными на них разумными граничными условиями, определяют уровни
+ энергии
+\begin_inset Formula 
+\begin{equation}
+E=mc^{2}\left[1-\frac{\alpha^{2}}{2n^{2}}-\frac{\alpha^{4}}{2n^{4}}\left(\frac{n}{l+1/2}-\frac{3}{4}\right)+\ldots\right],\label{eq:1.1.6}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+где 
+\begin_inset Formula $\alpha\equiv e^{2}/\left(4\pi\hbar c\right)$
+\end_inset
+
+ - 
+\begin_inset Quotes eld
+\end_inset
+
+постоянная тонкой структуры
+\begin_inset Quotes erd
+\end_inset
+
+, численное значение которой составляет приблизительно 
+\begin_inset Formula $1/137$
+\end_inset
+
+, 
+\begin_inset Formula $n$
+\end_inset
+
+ — положительное целое число, а 
+\begin_inset Formula $l$
+\end_inset
+
+ — орбитальный угловой момент в единицах 
+\begin_inset Formula $\hbar$
+\end_inset
+
+, принимающий целочисленные значения в интервале 
+\begin_inset Formula $0\leqslant l\leqslant n-1$
+\end_inset
+
+.
+ Наличие
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "7"
+key "key-2"
+literal "false"
+
+\end_inset
+
+Публикация Оскара Клейна
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "8"
+key "key-3"
+literal "false"
+
+\end_inset
+
+Публикация Вальтера Гордона
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+label "9"
+key "key-1"
+literal "false"
+
+\end_inset
+
+Список разумных граничных условий
+\end_layout
+
+\end_body
+\end_document
