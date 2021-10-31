@@ -1,3 +1,6 @@
+# переделал функции в понятную форму, но мое прошлое решение валидно,
+# прикрепил доказательство этого в pdf документе
+
 import numpy as np
 import scipy.special
 
@@ -9,31 +12,30 @@ def poiss(l, N):
     return np.array([x, y])
 
 
-def moment(k, n):
+def moment(n, k):
     assert k % 1 == 0
     assert type(n) == np.ndarray
-    return (np.unique(n ** k *
-                      np.array([(n == i).sum() / len(n) for i in n]))).sum()
+    return (n[0] ** k * n[1]).sum()
 
 
 def mean(n):
-    return moment(1, n)
+    return moment(n, 1)
 
 
 def std(n):
-    return moment(2, n - moment(1, n))
+    return mean(np.array([(n[0] - mean(n)) ** 2, n[1]]))
 
 
 if __name__ == '__main__':
+    l = 4
+    arr = poiss(l, 1000)
 
     def test_mean():
-        assert abs(mean(np.random.poisson(5, 100000)) - 5) < 0.1
-        assert abs(mean(np.random.poisson(10, 100000)) - 10) < 0.1
+        assert abs(mean(arr) - l) < 0.1
         print('mean_is_correct')
 
     def test_std():
-        assert abs(std(np.random.poisson(5, 100000)) - 5) < 0.1
-        assert abs(std(np.random.poisson(10, 100000)) - 10) < 0.1
+        assert abs(std(arr) - l) < 0.1
         print('std_is_correct')
 
     test_mean()
