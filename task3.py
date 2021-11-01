@@ -4,12 +4,9 @@ import numpy as np
 
 
 def poisson_gen(lm, N):
-
     if (lm < 0 or N < 1):
         raise ValueError
-
     n = np.arange(0, N)
-
     return (n + 1, np.cumproduct(lm / (n + 1))*np.exp(-lm))
 
 
@@ -44,6 +41,7 @@ if __name__ == "__main__":
         aver, disp = average_and_dispersion(poisson_gen(lm, 1000000))
         assert np.isclose(aver, lm)
         assert np.isclose(disp, lm)
+        
     for ar in arr:
         plt.plot(ar[1])
 
