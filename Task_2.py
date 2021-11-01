@@ -24,12 +24,12 @@ def analyze(fname):
     m = []
     
     for st in read_file(fname):
-        fun_count += int(s.find('fun:') != -1)
-        st = split_log_string(st)
+        fun_count += int(st.find('fun:') != -1)
+        st = split_str(st)
         if st != []:
             if st[1] not in DIWE:
                 DIWE[st[1]] = {'DEBUG': 0,'INFO': 0,'WARNING': 0,'ERROR': 0}
-            DIwE[st[1]][st[2]] += 1
+            DIWE[st[1]][st[2]] += 1
             m = st[3].split()
             
             if m[0] == 'Found' and m[2] == 'modes':
