@@ -41,7 +41,7 @@ def analyze(fname):
     return [DIWE, fun_count, m_list, radm_list]
 
 if __name__ == '__main__':
-    result = analyze('f.txt')
+    result = analyze('log.txt')
     print(result[0])
     print(f'fun_count: {result[1]}')
     print(f'm_list: {result[2]}')
