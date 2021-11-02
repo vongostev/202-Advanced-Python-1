@@ -5,14 +5,15 @@ Created on Mon Oct 25 16:13:28 2021
 @author: grego
 """
 import numpy as np
-
-def function_poisson(lam, n):
-    return lam ** n / np.math.factorial(n) * np.exp ** (-lam)
+import scipy.special as sci
 
 def poisson(lam, N):
-    return np.fromfunction(function_poisson, (lam, N))
+    if lam < 0 or N < 0:
+        raise ValueError
+    n = np.arange(N+1)
+    return np.float_power(lam, n) / sci.factorial(n) * np.exp(-lam)
 
-pois = poisson(4, 5)
-    
-print(np.ones(5))
-    
+# def 
+print(poisson(-0.5, 4))
+# np.array()
+# np.
