@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian, english]{babel}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{fancyhdr}
+
+\usepackage{ragged2e}
+\justifying
+
+\pagestyle{myheadings}
+\setcounter{page}{19}
+\setcounter{section}{0}
+\usepackage{fancyhdr}
+\fancyhead[R]{\thepage}
+\fancyhead[C]{\textit{\textsection 1.1 Релятивисткая волновая механика}}
+\fancyfoot[C]{}
+\fancyfoot[L]{2*}
+
+\begin{document}
+	\pagestyle{fancy}
+		\Russian\noindentопубликовать свое релятивисткое волновое уравнение, оно уже было независимо переоткрыто Оскаром Клейном [7] и Вальтером Гордоном [8]. По этой прчине релятивистский вариант называется \textquotedblleftуравнением Клейна Гордона\textquotedblright.
+		
+		Шредингер вывел свое релятивистское волновое уравнение, заметив, что гамильтониан $H$ и импульс $\textbf{p}$ \textquotedblleftэлектрона Лоренца\textquotedblright\ с массой $m$ и зарядом $e$, находящегося во внешнем векторном потенциале $\vb{A}$ и кулоновском потенцыиале $\phi$, связаны следующим соотношением \footnote{) Это соотношение лоренц-инвариантно, поскольку величины $\vb{A}$ и $\phi$ при Преобразованиях Лоренца изменяются точно так же, как c$\vb{p}$ и $E$ соответственно. Гамильтониан $H$ и импульс $\vb{p}$ Шредингер представлял в виде частных производных действия, однока это неважно для нашего рассмотрения.}):
+		\begin{equation}
+			\label{formula1}
+			0 = (H+e\phi )^2-c^2(\textbf{p} +e\textbf{A} /c)^2-m^2c^4.
+		\end{equation}
+		Соотношения де Бройля $(1.1 .1)$ для \textit{свободной} частицы, представленной плоской волной $\exp \{ 2 \pi i (\boldsymbol{\kappa} \cdot \textbf{x} - \nu t) \}$, можно получить, если произвести отождествление
+		\begin{equation}
+			\label{formula2}
+			\textbf{p} = h\textbf{k}\rightarrow -i\hbar\nabla,\;\;\;\; E=h\nu \rightarrow i\hbar \frac{\partial}{\partial t},
+		\end{equation}
+		где $\hbar$ --- удобное обозначение (введенное Дираком) для $h / 2 \pi$. Исходя из чисто формальной аналогиии Шредингер предположил, что электрон во внешних полях $\textbf{A}, \phi$ должен описываться волновой функцией $\psi (x, t)$, удовлетворяющей уравнению, получаемому при помощи той же самой замены в (\ref{formula1}):
+		\begin{equation}
+			\label{formula3}
+			0 = \biggl[\biggl(i\hbar \frac{\partial}{\partial t}+e\phi \biggr)^2 - c^2\biggl(-i\hbar \nabla +\frac{e \textbf{A}}{c}\biggr)^2-m^2c^4\biggr]\psi (\textbf {x},t).
+		\end{equation}
+		В частности, для стационарных состояний в атоме водорода справедливы равенства $\textbf{A} = 0$ и $\phi = e/(4 \pi r)$. Кроме того, в этом случае $\psi$ зависит от времени $t$ экспоненциально: $\exp (-i E t / h)$. Поэтому (\ref{formula4}) сводится к уравнению
+		\begin{equation}
+			\label{formula4}
+			0 = \biggl[\biggl(E+\frac{e^2}{4\pi r}\biggr)^2-c^2\hbar^2\nabla^2-m^2c^4\biggr]\psi (\textbf{x})
+		\end{equation}
+		Решения уравнения (\ref{formula4}) с наложенными на них разумными граничными условиями, определяют уровни энергии [9]
+		\begin{equation}
+			\label{formula5}
+			E = mc^2\biggl[1-\frac{\alpha^2}{2n^2}-\frac{\alpha^4}{2n^4}\biggl(\frac{n}{l+1/2}-\frac{3}{4}\biggl)+\ldots \biggr],
+		\end{equation}
+		где $\alpha \equiv e^2 / (4 \pi \hbar c)$ --- \textquotedblleftпостоянная тонкой структуры\textquotedblright\ , численное значение которой составляет приблизительно $1/137$, $n$ --- положительное целое число, а $l$ --- орбитальный угловой момент в единицах $\hbar$, принимающий целочисленные значения в интервале $0 \le l \le n-1$.
+\end{document}
