@@ -1,57 +1,40 @@
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.special as sp
-
 
 
 def distribution(lmbd, N):
     if lmbd < 0 or N < 0:
         raise ValueError
     n = np.arange(N+1)
-    return np.float_power(lmbd, n)*np.exp(-lmbd)/sp.factorial(n)
+    return (n, np.float_power(lmbd, n)*np.exp(-lmbd)/sp.factorial(n))
 
 
-def moment(distr, k, values=0):
-    if not isinstance(distr, np.ndarray) or not isinstance(k, int):
+def moment(distribution, k):
+    if not isinstance(k, int) or not isinstance(distribution[0], np.ndarray) or not isinstance(distribution[1], np.ndarray):
         raise ValueError
-    if not isinstance(values, np.ndarray) or values.size != distr.size:
-        values = np.arange(distr.size)
-    return np.sum(values**k*distr)
+    return np.sum(distribution[0]**k*distribution[1])
 
 
-def average(distribution, values=0):
-    if not isinstance(distribution, np.ndarray):
+def average(distribution):
+    return moment(distribution, 1)
+
+
+def dispertion(distribution):
+    if not isinstance(distribution[0], np.ndarray) or not isinstance(distribution[1], np.ndarray):
         raise ValueError
-    return moment(distribution, 1, values)
+    return average([(distribution[0] - average(distribution)) ** 2, distribution[1]])
 
 
-def dispersion(distribution):
-    if not isinstance(distribution, np.ndarray):
-        raise ValueError
-    return average(distribution, (np.arange(distribution.size) - average(distribution)) ** 2)
-
-
-def test_correct():
-    for lmbd in np.arange(25, 96, step=5):
-        for N in np.arange(5, 101, step=5):
-            print(
-                f'lambda = {lmbd}, N = {N}, average = {average(distribution(lmbd, N))}, dispersion = {dispersion(distribution(lmbd, N))}')
-
-
-def test_incorrect():
-    try:
-        distribution(-6, 1)
-    except ValueError:
-        print('Lambda must be positive')
-    try:
-        moment(1, 1)
-    except ValueError:
-        print('Distribution must be np.ndarray')
-    try:
-        moment(distribution(5, 15), 1.5)
-    except ValueError:
-        print('Moment power must be integer')
-
-
-if __name__ == "__main__":
-    test_correct()
-    test_incorrect()
+if __name__ == '__main__':
+    fig, ax = plt.subplots()
+    x = list()
+    for N in np.arange(1, 101, step=1):
+        x.append(average(distribution(50, N)))
+    plt.plot(x)
+    y = list()
+    for P in np.arange(1, 101, step=1):
+        y.append(dispertion(distribution(50, P)))
+    plt.plot(y)
+    ax.hlines(50, 1, 100)
+    plt.show()
