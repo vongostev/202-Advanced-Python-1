@@ -39,6 +39,7 @@ class Vector2D:
         return '(' + str(self.x) + ',' + str(self.y) + ')'
 
     def __eq__(self, other):
+        print('eq_test', self, other, type(self))
         return self.x == other.x and self.y == other.y
 
     def __gt__(self, other):
@@ -51,7 +52,7 @@ class Vector2D:
         return self.x**2 + self.y**2 >= other.x**2 + other.y**2
 
     def __le__(self, other):
-        self.x**2 + self.y**2 <= other.x**2 + other.y**2
+        return self.x**2 + self.y**2 <= other.x**2 + other.y**2
 
     def __ne__(self, other):
         return self.x != other.x or self.y != other.y
@@ -67,19 +68,43 @@ class Vector2D:
             raise ValueError('there are '+str(len(args))+'in multiplication')
 
         if isinstance(args[0], int):
-            return (self.x * args[0], self.y * args[0])
+            return Vector2D(self.x * args[0], self.y * args[0])
         elif isinstance(args[0], float):
             self.x *= float(args[0])
             self.y *= float(args[0])
-            return (self.x, self.y)
+            return Vector2D(self.x, self.y)
         elif isinstance(args[0], Vector2D):
             return (self.x * args[0].x + self.y * args[0].y)
         else:
             raise ValueError('unknown type')
 
 
-a = Vector2D(2, 3)
+if __name__ == '__main__':
+    ffnames = [is_even, generate_squares, split_list, make_dict]
+    tests = [[[-240], [-17], [0], [12], [131]], [[0, 4], [-3, 3]],
+             [[[1, 2, 3, 0, 0, 1]], [[0, 0, 2]]], [[[1, 'st1', 2, 'st2']]]]
+    answers = [[True, False, True, True, False], [[0, 1, 4, 9, 16], [9, 4, 1, 0, 1, 4, 9]], [
+        [1, 2, 3, 1], [2]], [{'str': ['st1', 'st2'], 'num': [1, 2]}]]
+    for f in range(0, 4):
 
-b = Vector2D(4, 4)
+        try:
+            res = [ffnames[f](*t) for t in tests[f]]
+            print(f, res)
+            assert res == answers[f]
 
-print(a, b*a)
+        except:
+            print(f, 'error')
+
+    a = Vector2D(2, 3)
+    b = Vector2D(4, -3)
+    print(a+b == b+a)
+
+    assert a+b == Vector2D(6, 0)
+    assert a-b == Vector2D(-2, 6)
+    assert b*a == -1
+    assert a*4 == Vector2D(8, 12)
+    print(type(a < b))
+    assert (a < b) == True
+    assert (a > b) == False
+    assert (b >= a) == True
+    assert (a <= b) == True
