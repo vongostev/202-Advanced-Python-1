@@ -1,4 +1,5 @@
 # Grigoriev Semyon
+import numpy
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import factorial
@@ -8,9 +9,9 @@ def distribution(lmbda, N):
     if lmbda < 0 or N < 0:
         raise ValueError
     n = np.arange(0, N + 1)
-    p = (lmbda ** n) * np.exp(-lmbda) / factorial(n)
-    return np.array([p, n])
-
+    with numpy.errstate(all='ignore'):
+        p = np.nan_to_num((pow(lmbda, n)) * np.exp(-lmbda) / factorial(n))
+    return np.array([p, n], dtype='float128')
 
 def moment(distribution, k):
     if not isinstance(distribution, np.ndarray) or not isinstance(k, int):
@@ -31,10 +32,10 @@ def variabiblity(distribution):
 
 
 if __name__ == '__main__':
-    d1 = distribution(4, 1000)
-    d2 = distribution(7, 1000)
-    d3 = distribution(10, 1000)
-    d0 = distribution(2, 1000)
+    d1 = distribution(float(4), 1000)
+    d2 = distribution(float(7), 1000)
+    d3 = distribution(float(10), 1000)
+    d0 = distribution(float(2), 1000)
 
     # Tests
     assert np.allclose(mean(d0), 2, 1e-16)
