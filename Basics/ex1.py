@@ -1,4 +1,5 @@
 import typing as tp
+import math
 
 
 def is_even(n: int) -> bool:
@@ -64,7 +65,7 @@ class Vector2D:
         return self.__str__()
 
     def norm(self) -> float:
-        return (self.x**2 + self.y**2)**0.5
+        return math.sqrt(self.x**2 + self.y**2)
 
     def __lt__(self, other: "Vector2D") -> bool:
         return self.norm() < other.norm()
@@ -83,6 +84,24 @@ class Vector2D:
 
     def __ge__(self, other: "Vector2D") -> bool:
         return self.norm() >= other.norm()
+
+    def __add__(self, other: "Vector2D") -> "Vector2D":
+        return Vector2D(other.x + self.x, other.y + self.y)
+
+    """
+    Для желающих: реализовать сложение, (__add__) 
+    вычитание (__sub__) и умножение вектора на число (__mul__)
+    перегрузкой операторов класса.
+    """
+
+    def __add__(self, other: "Vector2D") -> "Vector2D":
+        return Vector2D(other.x + self.x, other.y + self.y)
+
+    def __sub__(self, other: "Vector2D") -> "Vector2D":
+        return Vector2D(other.x - self.x, other.y - self.y)
+
+    def __mul__(self, other: float) -> "Vector2D":
+        return Vector2D(other * self.x, other * self.y)
 
 
 if __name__ == "__main__":
@@ -109,5 +128,8 @@ if __name__ == "__main__":
         {'str': [('asd', 3), ('sdf', 3), ('asdfsgf', 7)], 'num': []}
 
     assert Vector2D(3, 4).norm() == 5
+    assert Vector2D(3, 4) + Vector2D(1, 0) == Vector2D(4, 4)
+    assert Vector2D(3, 4) - Vector2D(1, 0) == Vector2D(2, 4)
+    assert Vector2D(3, 4) * 1.5 == Vector2D(4.5, 6)
 
     print("Tests ok")
