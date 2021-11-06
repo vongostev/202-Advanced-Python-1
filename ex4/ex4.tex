@@ -1,0 +1,130 @@
+\documentclass[a4paper,14pt]{article}
+
+%----------Работа с русским языком------------
+\usepackage[warn]{mathtext}	
+\usepackage{cmap}					% поиск в PDF
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%------Дополнительная работа с математикой----
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools}
+\usepackage{icomma}
+
+
+
+%--Перенос знаков в формулах (по Львовскому)--
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%----------Работа с картинками----------------
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%----------Работа с таблицами-----------------
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%--------------Теоремы------------------------
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+
+\theoremstyle{remark} % "Примечание"
+
+%---------Программирование--------------------
+\usepackage{etoolbox} % логические операторы
+
+%-------------Страница------------------------
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=30mm}
+\geometry{right=30mm}
+
+\usepackage{fancyhdr} % Колонтитулы
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{\normalsize \textit \thepage} %номер страницы справа на нечетных
+\fancyhead[CO]{\normalsize \textit{\S 1.1. Релятивисткая волновая механика}}
+%\renewcommand{\headrulewidth}{0,1mm}  % Толщина линейки, отчеркивающей верхний колонтитул
+%\lfoot{Нижний левый}
+%\rfoot{Нижний правый}
+%\rhead{Верхний правый}
+%\chead{Верхний в центре}
+%\lhead{Верхний левый}
+% \cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soul} % Модификаторы начертания
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+
+
+%----------------Прочее-----------------------
+\usepackage{lipsum}
+\usepackage{multicol} % Несколько колонок
+\usepackage{tikz} % Работа с графикой
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+%\usepackage{floatrow}
+\usepackage{caption}
+\usepackage[caption2]{ccaption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\usepackage{wasysym}
+\setlength{\fboxrule}{0.5pt}
+\usepackage{mathrsfs}
+\usepackage{makeidx}
+\makeindex
+%---------------------------------------------
+%---------------------------------------------
+%---------------ДОКУМЕНТ----------------------
+%---------------------------------------------
+%---------------------------------------------
+\begin{document}
+%------------Команды и окружения--------------
+\newcommand{\un}{\underline}
+\newcommand{\ve}{\vec}
+
+%---------------------------------------------
+\small{ опубликовать свое релятивистсское волновое уравнение, оно уже было независимо переоткрыто Оскаром Клейном [7] и Вальтером Гордоном [8]. По этой причине релятивистский вариант называется "уравнение Клейна-Гордона".
+
+Шредингер вывел свое релятивистское волновое уравнение, заметив, что гамильтониан $H$ и импульс $\mathbf{p}$ "электрона Лоренца" c массой $m$ и зарядом $e$, находящегося во внешнем векторном потенциале $\mathbf{A}$ и кулоновском потенциале $\phi$, связаны следующим соотношением \footnote[1]{Это соотношение лоренц-инвариантно, поскольку величины $\mathbf{A}$ и $\phi$ при преобразованиях Лоренца изменяются точно так же, как и $\mathbf{p}$ и \textit{E} соответственно. Гамильтониан \textit{H} и импульс $\mathbf{p}$ Шрёдингер представлял в виде частных производных действия, однако это неважно для нашего рассмотрения.}
+\begin{align}\label{eq1}
+0=(H+e\phi)^{2}-c^{2}(\mathbf{p}+e \mathbf{A} / c)^{2}-m^{2} c^{4}
+\end{align}
+Соотношения де Бройля $(1. 1.1)$ для \textit{свободной} частицы, представленной плоской волной $\exp \{2 \pi i(\boldsymbol{\kappa} \cdot \mathbf{x}-\nu t)\}$, можно получить, если произвести отождествление
+\begin{align}\label{eq2}
+\mathbf{p}=h \mathbf{k} \rightarrow-i \hbar \nabla, \quad E=h \nu \rightarrow i \hbar \frac{\partial}{\partial t}
+\end{align}
+где $\hbar$ -- удобное обозначение (введенное Дираком) для $h / 2 \pi .$ Исходя из чисто формальной аналогии, Шредингер предположил, что электрон во внешних полях $\mathbf{A}, \;\phi$ должен описываться волновой функцией $\psi(\mathbf{x}, t)$, удовлетворяющей уравнению, получаемому при помощи той же самой замены в \ref{eq1}
+\begin{align}\label{eq3}
+0=\left[\left(i \hbar \frac{\partial}{\partial t}+e \phi\right)^{2}-c^{2}\left(-i \hbar \nabla+\frac{e \mathbf{A}}{c}\right)^{2}-m^{2} c^{4}\right] \psi(\mathbf{x}, t)
+\end{align}
+В частности, для стационарных состояний в атоме водорода справедливы равенства $\mathbf{A}=0$ и $\phi=e /(4 \pi r) .$ Кроме того, в этом случае $\psi$ зависит от времени $t$ экспоненциально: $\exp (-i E t / \hbar) .$ Поэтому \ref{eq3} сводится к уравнению
+\begin{align}\label{eq4}
+0=\left[\left(E+\frac{e^{2}}{4 \pi r}\right)^{2}-c^{2} \hbar^{2} \nabla^{2}-m^{2} c^{4}\right] \psi(\mathbf{x})
+\end{align}
+Решения уравнения \ref{eq4} с наложенными на них разумными граничными условиями, определяют уровни энергии [9]
+\begin{align}\label{eq5}
+E=m c^{2}\left[1-\frac{\alpha^{2}}{2 n^{2}}-\frac{\alpha^{4}}{2 n^{4}}\left(\frac{n}{l+1 / 2}-\frac{3}{4}\right)+\ldots\right]
+\end{align}
+где $\alpha=\mathbf{c}^{4}/(4\pi\hbar c)$ - "постоянная тонкой структуры", численное значение которой составляет приблизительно $1/137$, n - положительное целое число, а l - орбитальный угловой момент в единицах $\hbar$, принимающий целочисленное значение в интервале $0<=l<=n-1$. Наличие}
+\end{document}
