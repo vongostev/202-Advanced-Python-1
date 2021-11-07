@@ -1,0 +1,61 @@
+\documentclass[a5paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{geometry}
+\usepackage{cmap}
+\geometry{left=12mm,right=12mm, tmargin=15mm, bmargin = 10mm,headsep=3mm}
+\usepackage{amsmath}
+\usepackage[english,russian]{babel}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\setcounter{page}{19}
+\fancyhead[R]{\thepage}
+\fancyhead[C]{\textit{\textsection 1.1 Релятивисткая волновая механика}}
+\fancyfoot[L]{2*}
+\fancyfoot[C]{}
+
+\begin{document}
+\pagestyle{fancy}
+\noindent опубликовать свое релятивистское волновое уравнение, оно уже было перекрыто Оскаром Клейном [7] и Вальтером Гордоном [8].  По этой причине релятивистский вариант называется ``уравнением Клейна-Гордона''.
+
+Шредингер вывел свое релятивистское волновое уравнение, заметив, что гамильтониан $H$ и импульс $\mathbf{p}$ ''электрона Лоренца'' с массой $m$ и зарядом $e$, находящегося во внешнем векторном потенциале $\mathbf{A}$ и кулоновском потенциале $\phi$, связаны следующим соотношением\footnote{) Это соотношение лоренц-инвариантно, поскольку величины $\mathbf{A}$ и $\phi$ при преобразованиях Лоренца изменяются точно так же, как $c\mathbf{p}$ и $E$ соответственно. Гамильтониан $H$ и импульс $\mathbf{p}$ Шредингер представлял в виде частных производных действия, однако это неважно для нашего рассмотрения.}):
+
+\begin{equation}
+\label{formula1}
+\tag{1.1.2}
+0 = (H+e\phi )^2-c^2(\mathbf{p} +e\mathbf{A} /c)^2-m^2c^4.
+\end{equation}
+
+\noindent Соотношения де Бройля (1.1.1) для \textit{cвободной} частицы, представленной плоской волной $\exp \{ 2 \pi i( \boldsymbol {\kappa} \cdot \mathbf{x} -vt) \} $, можно получить, если произвести отождествление
+
+\begin{equation}
+\tag{1.1.3}
+\mathbf{p} = h\mathbf{k}\rightarrow -i\hbar\nabla,\;\;\;\;\;\; E=h\nu \rightarrow i\hbar \frac{\partial}{\partial t},
+\end{equation}
+
+\noindent где $\hbar$ — удобное обозначение (введенное Дираком) для $h/2 \pi$. Исходя из чисто формальной аналогии Шредингер предположил, что электрон во внешних полях $\mathbf{A}$, $\phi$ должен описываться волновой функцией $\psi(\mathbf{x},t)$, удовлетворяющей уравнению, получаемому при помощи той же самой замены в \eqref{formula1}:
+
+\begin{equation}
+\label{formula2} 
+\tag{1.1.4}
+0 = \biggl[\biggl(i\hbar \frac{\partial}{\partial t}+e\phi \biggr)^2 - c^2\biggl(-i\hbar \nabla +\frac{e \mathbf{A}}{c}\biggr)^2-m^2c^4\biggr]\psi (\mathbf {x},t).
+\end{equation}
+
+\noindent В частности, для стационарных состояний в атоме водорода справедливы равенства $\mathbf{A} = 0$ и $\psi = e/(4\pi r)$. Кроме того, в этом случае $\psi$ зависит от времени $t$ экспоненциально: $\exp(-iEt/\hbar)$. Поэтому \eqref{formula2} сводится к уравнению
+
+\begin{equation}
+\label{formula3}
+\tag{1.1.5}
+0 = \biggl[\biggl(E+\frac{e^2}{4\pi r}\biggr)^2-c^2\hbar^2\nabla^2-m^2c^4\biggr]\psi (\mathbf{x})
+\end{equation}
+
+\noindent Решения уравнения \eqref{formula3} с наложенными на них разумными граничными условиями, определяют уровни энергии [9]
+
+\begin{equation}
+\tag{1.1.6}
+E = mc^2\biggl[1-\frac{\alpha^2}{2n^2}-\frac{\alpha^4}{2n^4}\biggl(\frac{n}{l+1/2}-\frac{3}{4}\biggl)+\ldots \biggr],
+\end{equation}
+
+\noindent где $\alpha\equiv /(4\pi\hbar c)$ -- ``постоянная тонкой структуры'', численное значение которой составляет приблизительно $1/137$, $n$ -- положительное целое число, а $l$ -- орбитальный угловой момент в единицах $\hbar$, принимающий целочисленные значения в интервале $0\le l\le n-1$. Наличие
+
+\end{document}
