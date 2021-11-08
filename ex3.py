@@ -31,7 +31,7 @@ def dispersion(distribution):
 if __name__ == '__main__':
 
     for lbd in np.arange(2, 123, step=20): 
-        for N in np.arange(10, 151, step=10):
+        for N in np.arange(lbd, 151, step=10):
             distr = poission_distribution(lbd, N)
             print(f'lambda = {lbd}, N = {N}, mean = {mean(distr)}, dispersion = {dispersion(distr)}')
 
