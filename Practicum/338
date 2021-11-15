@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import math
 from math import sqrt, sin, cos, tan
 from scipy.optimize import curve_fit
-#print('😀')
 
 def MHK(X, Y):
     X = np.array(X)
