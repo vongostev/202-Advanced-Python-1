@@ -16,6 +16,10 @@ assert function_to_test(args) == correct_answer
 
 15 первых задач из [списка на HackerRank](https://www.hackerrank.com/domains/python)
 
+#### Штрафные задачи
+
+Задачи на *Hackerrank*: [Alphabet Rangoli](https://www.hackerrank.com/challenges/alphabet-rangoli/problem?isFullScreen=true), [Simple Array Sum](https://www.hackerrank.com/challenges/simple-array-sum/problem?isFullScreen=true), [Mini-Max Sum](https://www.hackerrank.com/challenges/mini-max-sum/problem?isFullScreen=true), [Time Conversion](https://www.hackerrank.com/challenges/time-conversion/problem?isFullScreen=true), [Counting valleys](https://www.hackerrank.com/challenges/counting-valleys/problem?isFullScreen=true)
+
 ### Блок 2. Строки и файлы
 
 Блок делится на 2 части:
