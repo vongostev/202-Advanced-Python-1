@@ -25,4 +25,4 @@
 
 Для прохождения промежуточной аттестации необходимо выполнить задания:
 1. Задания на базовый синтаксис, условие которого описано [тут](https://github.com/vongostev/202-Advanced-Python-1/blob/main/Basics/basics.md)
-2. Задания, которые будут описаны [тут](https://github.com/vongostev/202-Advanced-Python-1/blob/main/Numpy/numpy_1d.md)
+2. Задания по `numpy`, которые описаны [тут](https://github.com/vongostev/202-Advanced-Python-1/blob/main/Numpy/numpy_1d.md)
