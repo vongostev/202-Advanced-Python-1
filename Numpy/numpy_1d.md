@@ -33,4 +33,6 @@ import matplotlib.pyplot as plt
 plt.plot(numpy_arr)
 plt.show()
 ```
+Пример использования `matplotlib` можно увидеть в [ноутбуке](https://github.com/vongostev/202-Advanced-Python-1/blob/main/Numpy/Matplotlib Basic.ipynb).
 
+**Бонус:** За каждые 10 заданий из [самоучителя](https://github.com/rougier/numpy-100/blob/master/100_Numpy_exercises.ipynb) ставится `+`.
