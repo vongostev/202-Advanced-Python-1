@@ -1,5 +1,5 @@
 # 202-Advanced-Python-1
-
+Я поменяль
 Всем привет! Ниже список того, что нам потребуется для успешной работы в течение этого года: 
 
 1. Python в составе пакета Anaconda. Советую поставить [Miniconda](https://docs.conda.io/en/latest/miniconda.html ) 
