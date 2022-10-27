@@ -1,0 +1,32 @@
+#ex4 = 'path to log.txt'
+def readtype(line):
+    typ = line[(line.find('[')+1):(line.find(']'))]
+    return typ
+def readmodule(line):
+    module = line[(line.find('- ')+2):(line.find('[') - 1)]
+    return module
+def readmode(line):
+    amount = line[(line.find('Found ') + 6):(line.find('modes') - 1)]
+    return amount
+with open(ex4, 'r') as f:
+    d = {}
+    g = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
+    countfun = 0
+    modes = []
+    for line in f:
+        if '- ' in line:
+            module = readmodule(line)
+            typ = readtype(line)
+            if module not in d:
+                d.setdefault(module, {'DEBUG': 0, 'INFO': 0, 'WARNING': 0, 'ERROR': 0})
+            for i in g:
+                if i in typ:
+                    d[module][i] += 1
+        if 'fun: ' in line:
+            countfun += 1
+        if 'modes' in line:
+            modes.append(line[(line.find('Found ') + 6):(line.find(' modes'))])
+                                 
+    print(d)
+    print(countfun)
+    print(modes)
