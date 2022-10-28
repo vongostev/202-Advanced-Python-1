@@ -1,0 +1,34 @@
+way="C:/Users/user/Desktop/log.txt"
+def readtype(line):
+    typ = line[(line.find('[') + 1):(line.find(']'))]
+    return typ
+def readmodule(line):
+    module = line[(line.find('- ') + 2):(line.find('[') - 1)]
+    return module
+def readmode(line):
+    amount = line[(line.find('Found ') + 6):(line.find('modes') - 1)]
+    return amount
+with open(way, "r") as f:
+    d = {}
+    g = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
+    count = 0
+    modes = []
+    for line in f: #пробегаюсь по строчкам текста
+        if '- ' in line: #обрабатываю строки с -
+            module = readmodule(line)   #модуль code.pyMMf
+            typ = readtype(line) # тип модулч
+            if module not in d: #заносим модуль
+                d.setdefault(module, {'DEBUG': 0, 'INFO': 0, 'WARNING': 0, 'ERROR': 0})
+                #print('\n')
+            for i in g:
+                if i in typ:
+                    d[module][i] += 1
+        if 'fun: ' in line:
+            count += 1
+        if 'modes' in line:
+            modes.append(line[(line.find('Found ') + 6):(line.find(' modes'))])
+
+
+    print(d)
+    print(count)
+    print(modes)
