@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.special
+import math
+
+
+def P(n, liambda):
+    if liambda < 0:
+        raise Exception("liambda < 0")
+    else:
+        f0 = np.arange(0, n)
+        f1 = liambda**f0
+        f2 = scipy.special.factorial(f0)
+        f3 = math.exp(-liambda)
+        return f1*f3/f2
+
+
+def srnk(k, puasson):
+    if isinstance(puasson, np.ndarray) and isinstance(k, int):
+        arr = np.arange(len(puasson))**k
+        return np.sum(arr*puasson)
+    else:
+        raise Exception("He tot tip")
+
+
+def sigma(puasson):
+    a = (np.arange(len(puasson)) - srnk(1, puasson))**2
+    return np.sum(a*puasson)
+
+
+def function_to_test(n, limbda, s):
+    poisson = P(n, limbda)
+    sr = srnk(1, poisson)
+    std = sigma(poisson)
+    plt.plot(poisson[:15])
+    plt.show()
+    if abs(sr-limbda) < limbda*s and abs(std - limbda) < limbda*s:
+        return True
+    else:
+        return False
+
+
+if __name__ == "__main__":
+    assert function_to_test(1000, 2, 0.01) == True
+    assert function_to_test(100, 5, 0.01) == True
+    assert function_to_test(10, 1, 0.01) == True
+    assert function_to_test(1000, 15, 0.01) == True
