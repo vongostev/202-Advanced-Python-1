@@ -1,0 +1,36 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.special
+import math
+
+def poisson_distribution(n, lmbd):
+    if lmbd < 0:
+        raise ValueError("lambda < 0")
+
+    num = np.arange(0, n)
+    arr = lmbd**num
+    arr = arr*math.exp(-lmbd)/scipy.special.factorial(num)
+    return arr
+
+def initial_moment(k, arr1):
+    if isinstance(arr1, np.ndarray):
+        if isinstance(k, int):
+            arr = np.arange(len(arr1))**k
+            return np.sum(arr*arr1)
+        raise ValueError("wrong type of array")
+    raise ValueError("k must be integer")
+
+def diviation(arr):
+    a = (np.arange(len(arr)) - initial_moment(1, arr))**2
+    return np.sum(a*arr)
+
+if __name__ == "__main__":
+    n = int(input())
+    lmbd = int(input())
+    k = int(input())
+    p = (poisson_distribution(n, lmbd))
+    plt.plot(p)
+    #plt.show()
+    print("initial_moment = ", initial_moment(k, p))
+    print("mean = ", initial_moment(1, p))
+    print("diviation = ", diviation(p))
