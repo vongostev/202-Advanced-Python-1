@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import scipy.special
 import matplotlib.pyplot as plt
@@ -32,6 +31,15 @@ def dispersion(n, p):
     return disp
 
 
+def test(x, x_ans, err):
+    if abs(x_ans - x) <= err:
+        print(
+            f"{x:.3g} совпадает с реальным значением {x_ans:.3g} в пределах погрешности.")
+    else:
+        print(
+            f"{x:.3g} не совпадает с реальным значением {x_ans:.3g} в пределах погрешности.")
+
+
 if __name__ == '__main__':
     p2 = poisson(2, 1000)[:11]
     p4 = poisson(4, 1000)[:11]
@@ -49,12 +57,16 @@ if __name__ == '__main__':
     plt.ylabel('Вероятность', fontsize=14)
     plt.legend()
     plt.show()
-    l, n = int(input()), int(input())
+    l = int(input("Введите значение среднего случайно величины: "))
+    n = int(input("Введите максимальное значение случайной величины: "))
     p = poisson(l, n)
     n_row = np.arange(0, n+1)
     l2 = inital_moment(n_row, p, 2)
-    l = mean(n_row, p)
+    l_mean = mean(n_row, p)
     d = dispersion(n_row, p)
     print(f"Начальный момент 2-го порядка - {l2:.3g}")
-    print(f"Среднее значение - {l:.3g}")
+    print(f"Среднее значение - {l_mean:.3g}")
     print(f"Дисперсия - {d:.3g}")
+    err = float(input("Введите точность сравнения: "))
+    test(l_mean, l, err)
+    test(d, l, err)
