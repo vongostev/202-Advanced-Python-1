@@ -41,11 +41,11 @@ def Compare (x, value, error=0.001):
 
 if __name__ == '__main__':
     print("Enter lambda: ")
-    lmbd = 50  #int(input())
+    lmbd = int(input())
     print("Enter N: ")
-    N = 100  #int(input())
+    N = int(input())
     print("Enter k: ")
-    k = 2  #int(input())
+    k = int(input())
     arr = poisson_desribution(lmbd, N)
     Plot(arr)
     print("Initial Moment for k =", k, "is: ", initial_Moment(arr, k))
