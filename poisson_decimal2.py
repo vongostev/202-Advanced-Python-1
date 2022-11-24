@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from decimal import Decimal
 
+#Изменения прокомментированы, также убрана лишняя функция poisson_uni(sr, a)
+
 def poisson(sr, N):
     if sr<0:
         raise ValueError('sr must be negative')
@@ -17,9 +19,11 @@ def moment(n, k):
         c = n*arr**k
         return c.sum()
 
+#Убрана лишняя проверка условия, использована функция вычисления моментов в функции disp()
 def disp(n):
     return moment(n, 2) - moment(n, 1) ** 2   
-    
+
+#Использована встроенная экспонента для decimal вместо самописной функции    
 def exp(x):
     return x.exp()
 
