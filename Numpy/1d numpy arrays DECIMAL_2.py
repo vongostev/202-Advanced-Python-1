@@ -27,26 +27,25 @@ def poisson_distribution(lambda_, N):
 
 
 # Момент случайной величины
-def moment_of_rv(P, k):
+def moment_of_rv(n, P, k):
     if type(k) != int:
         raise Exception("Incorrect k type")
     if type(P) != np.ndarray and type(P) != np.array:
         raise Exception("Incorrect P type")
 
     P = P/P.sum()  # нормировка вероятности
-    n = float2decimal(pow(np.arange(P.size, dtype=float), k))*P
-    return n.sum()
+    m = float2decimal(pow(n, k))*float2decimal(P)
+    return m.sum()
 
 
 # Среднее значение случайной величины
-def mean_value(P):
-    return moment_of_rv(P, 1)
+def mean_value(n, P):
+    return moment_of_rv(n, P, 1)
 
 
 # Дисперсия случайной величины
-def dispersion(P):
-    return moment_of_rv(poisson_distribution(lambda_, \
-                                             P.size-1-mean_value(P)), 2)
+def dispersion(n, P):
+    return moment_of_rv(float2decimal(n) - mean_value(n, P), P, 2)
 
 
 if __name__ == '__main__':
@@ -59,6 +58,6 @@ if __name__ == '__main__':
     P = poisson_distribution(lambda_, N)
     plt.plot(P)
     plt.show()
-    # print(P)
-    print("Mean value =", mean_value(P))
-    print("Dispersion =", dispersion(P))
+
+    print("Mean value =", mean_value(np.arange(P.size, dtype=float), P))
+    print("Dispersion =", dispersion(np.arange(P.size, dtype=float), P))
