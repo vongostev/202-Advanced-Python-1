@@ -1,0 +1,63 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math as m
+import scipy.special as sp
+from decimal import Decimal
+
+plt.style.use('classic')
+
+
+def dotplot(x, d, name, color):
+    plt.plot(x, d, color=color, label=name, linestyle='', marker='o', markersize=5)
+
+
+def poisson(l, N, dN = 1):
+    if l < 0:
+        raise ValueError('l must be non negative')
+    if N < 0:
+        raise ValueError('N must be non negative')
+    x = np.arange(0, N, dN)
+    x = np.append(x, N)
+    a = np.power(l, x)
+    b = m.exp(l)
+    c = sp.factorial(x)
+    p = a/b/c
+    return p
+
+
+def moment(x, k):
+    if int(k) != k:
+        raise ValueError('k must be integer')
+    if not isinstance(x, np.ndarray):
+        raise ValueError('x must be array')
+    m = np.arange(0, len(x))
+    m = x*(m**k)
+    return np.sum(x * np.arange(len(x)) ** k)
+
+
+def dispersion(x, p0):
+    x_avg = moment(p0, 1)
+    x2_avg = moment(p0, 2)
+    d = x2_avg - x_avg**2
+    return d
+
+
+N = 270     # максимальное значение случайной величины 
+
+dN = 0.01   # шаг случайной величины (чтобы график гладкий был)
+k = 2       # порядок начального момента
+n = np.arange(0, N, dN)
+n = np.append(n, N)
+
+
+for i in range(1, 14, 4):   # i - среднее значение случайно величины
+    P0 = poisson(i, N)
+    P = poisson(i, N, dN)
+    plt.plot(n, P, color='hotpink', label='Poisson')
+    dotplot(moment(P0, k), np.max(P), 'Initial moment for ' + str(k), 'black')
+    dotplot(moment(P0, 1), np.max(P)*0.9, 'Python mean = ' + str(moment(P0, 1)), 'orange')
+    dotplot(dispersion(np.arange(0, N+1), P0), np.max(P)*0.8, 'Dispersion', 'red')
+    dotplot(i, np.max(P), 'True mean = ' + str(i), 'grey')
+
+    plt.legend(fontsize = 'small', loc = 'lower right')
+    plt.show()
