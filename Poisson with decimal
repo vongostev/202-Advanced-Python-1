@@ -1,0 +1,116 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math as m
+import scipy.special as sp
+from decimal import Decimal as dm
+from decimal import getcontext
+
+plt.style.use('classic')
+getcontext().prec = 10
+
+
+def dm_factorial(a):
+    return dm(sp.factorial(a))
+
+
+v_dm = np.vectorize(dm)
+v_dm_factorial = np.vectorize(dm_factorial)
+
+
+def dotplot(x, d, name, color):
+    plt.plot(x, d, color=color, label=name, linestyle='', marker='o', markersize=6)
+
+
+def dm_dotplot(x, d, name, color):
+    plt.plot(x, d, color=color, label=name, linestyle='', marker='*', markersize=6)
+
+
+def dm_poisson(l, N, dN = 1):
+    if l < 0:
+        raise ValueError('l must be non negative')
+    if N < 0:
+        raise ValueError('N must be non negative')
+    x = np.arange(0, N, dN, dtype='float')
+    x = np.append(x, N)
+    x_dm = v_dm(x)
+    l = dm(l)
+    a = np.power(l, x_dm)
+    b = v_dm(m.exp(l))
+    c = v_dm_factorial(x)
+    p = a / b / c
+    return p
+
+
+def poisson(l, N, dN = 1):
+    if l < 0:
+        raise ValueError('l must be non negative')
+    if N < 0:
+        raise ValueError('N must be non negative')
+    x = np.arange(0, N, dN)
+    x = np.append(x, N)
+    a = np.power(l, x)
+    b = m.exp(l)
+    c = sp.factorial(x)
+    p = a/b/c
+    return p
+
+
+def dm_moment(x, k):
+    if int(k) != k:
+        raise ValueError('k must be integer')
+    if not isinstance(x, np.ndarray):
+        raise ValueError('x must be array')
+    m = np.arange(0, len(x), dtype='float')
+    m_dm = v_dm(m)
+    m_dm = x * (m_dm ** k)
+    return np.sum(m_dm)
+
+
+def moment(x, k):
+    if int(k) != k:
+        raise ValueError('k must be integer')
+    if not isinstance(x, np.ndarray):
+        raise ValueError('x must be array')
+    m = np.arange(0, len(x))
+    m = x*(m**k)
+    return np.sum(m)
+
+
+def dm_dispersion(p0):
+    x_avg = dm_moment(p0, 1)
+    x2_avg = dm_moment(p0, 2)
+    d = x2_avg - x_avg ** 2
+    return d
+
+
+def dispersion(p0):
+    x_avg = moment(p0, 1)
+    x2_avg = moment(p0, 2)
+    d = x2_avg - x_avg**2
+    return d
+
+
+N = 100
+l = 7
+dN = 0.1
+k = 2
+n = np.arange(0, N, dN)
+n = np.append(n, N)
+P0 = poisson(l, N)
+P = poisson(l, N, dN)
+dm_P0 = dm_poisson(l, N)
+dm_P = dm_poisson(l, N, dN)
+
+
+plt.plot(n, dm_poisson(l, N, dN), color='green', label='Poisson decimal')
+plt.plot(n, P, color='black', label='Poisson', linestyle='--')
+dotplot(moment(P0, k), np.max(P), 'Initial moment for ' + str(k), 'yellow')
+dm_dotplot(dm_moment(dm_P0, k), np.max(P), 'Initial dm_moment for ' + str(k), 'yellow')
+dotplot(moment(P0, 1), np.max(P)*0.9, 'Python mean = ' + str(moment(P0, 1)), 'orange')
+dm_dotplot(dm_moment(dm_P0, 1), np.max(P)*0.9, 'Python dm_mean = ' + str(dm_moment(dm_P0, 1)), 'orange')
+dotplot(dispersion(P0), np.max(P)*0.8, 'Dispersion', 'red')
+dm_dotplot(dm_dispersion(dm_P0), np.max(P)*0.8, 'dm_Dispersion', 'red')
+dotplot(l, np.max(P), 'True mean = ' + str(l), 'grey')
+
+plt.legend(fontsize = 'small', loc = 'lower right')
+plt.show()
