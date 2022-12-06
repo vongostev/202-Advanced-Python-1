@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math as m
 import scipy.special as sp
-from decimal import Decimal
 
 plt.style.use('classic')
 
@@ -32,7 +31,7 @@ def moment(x, k):
         raise ValueError('x must be array')
     m = np.arange(0, len(x))
     m = x*(m**k)
-    return np.sum(x * np.arange(len(x)) ** k)
+    return np.sum(m)
 
 
 def dispersion(x, p0):
