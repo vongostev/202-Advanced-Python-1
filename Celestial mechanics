@@ -1,0 +1,158 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import random as rnd
+
+G = 6.6743e-1    # 6,6743e-11 [м^3 / (кг*c^2)]
+# изменил порядок тк беру мЕньшие массы
+dt = 0.005
+zerovec = np.array([0, 0, 0], dtype='float')
+
+
+def E(v, r, bodies):
+    P = 0
+    T = np.dot(v, v)/2
+    for x in bodies:
+        R = r - x.vec_p
+        if np.dot(R, R) != 0:
+            P += G*x.mass/np.power(np.dot(R, R), 0.5)
+    E = T - P
+    if E < 0:
+        return 'E<0, ellipse'
+    if E > 0:
+        return 'E>0, hyperbola'
+    else:
+        return 'E=0, parabola'
+
+
+def setobject(vec_p, color='orange', size=15):
+    ax.plot3D(vec_p[0], vec_p[1], vec_p[2], marker='o', color=color, markersize=size)
+
+
+def randomvec(x1, x2):
+    x = rnd.choice([1, -1])*rnd.uniform(x1, x2)
+    y = rnd.choice([1, -1])*rnd.uniform(x1, x2)
+    z = rnd.choice([1, -1])*rnd.uniform(x1, x2)
+    return np.array([x, y, z])
+
+
+class Star:
+    def __init__(self, mass, vec_p=zerovec):
+        self.mass = mass
+        self.vec_p = vec_p
+
+
+class CosmicBody:
+    def __init__(self, mass=0, vec_p=zerovec, vec_v=zerovec):
+        self.mass = mass
+        self.vec_p = vec_p
+        self.vec_v = vec_v
+
+    def gravitate(self, bodies=[]):
+        f = zerovec
+        for x in bodies:
+            r = x.vec_p - self.vec_p
+            R = math.pow(np.dot(r, r), 1.5)
+            if R > 0:
+                f = f + x.mass*r/R
+        E = G*f
+        return E    # напряженность грав поля
+
+    def __del__(self):
+        print(end='')
+
+    def destroy(self):
+        self.__del__()
+        raise Exception('Game over')
+
+    def random(self):
+        self.mass = rnd.uniform(0, 10)
+        self.vec_p = randomvec(0, 5)
+        self.vec_v = randomvec(0, 10)
+
+
+R0 = np.array([5.0, -1.0, 4.5])
+Sun = Star(3000)
+Sun2 = Star(2000, np.array([-5.0, 0.0, 0.0]))
+Earth = CosmicBody()
+Earth.vec_v = np.array([6.0, -1.0, -5.7])
+Earth.mass = 1
+Earth.vec_p = R0
+Body1 = CosmicBody()
+Body1.random()
+
+
+x = np.array([])
+y = np.array([])
+z = np.array([])
+# система Earth - Sun
+'''for i in range(0, 55):
+    for j in range(0, 3):
+        v0 = Earth.vec_v
+        r0 = Earth.vec_p
+        bodies = [Earth, Sun]
+        fig = plt.figure()
+        ax = plt.axes(projection='3d')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        setobject(Sun.vec_p)
+        setobject(Earth.vec_p, 'blue', 10)
+
+        x = np.append(x, r0[0])
+        y = np.append(y, r0[1])
+        z = np.append(z, r0[2])
+        Earth.vec_v += dt * Earth.gravitate(bodies)
+        Earth.vec_p += Earth.vec_v * dt + (Earth.vec_v - v0) * dt ** 2 / 2
+
+        if np.dot(r0, Earth.vec_p) == 0:
+            Earth.destroy()
+
+        ax.plot3D(x, y, z)
+        angle = 10 + i
+        ax.view_init(20, angle)
+        ax.set_title('|V| = ' + str(np.power(np.dot(v0, v0), 0.5)) + '\n' + E(Earth.vec_v, Earth.vec_p, bodies))
+        filename = '/путь/angle-' + str(10*angle+j) + '.png'
+        plt.savefig(fname=filename, dpi=96)
+        plt.gca()
+        plt.close(fig)'''
+
+ilim = 55
+jlim = 3
+n = ilim*jlim
+bodies = [Sun, Sun2, Earth, Body1]    # в начале перечисляются звезды
+s = 2   # кол-во звезд в массиве bodies
+c = len(bodies) - s
+x = np.array([0.0]*n*c).reshape(c, n)
+y = np.array([0.0]*n*c).reshape(c, n)
+z = np.array([0.0]*n*c).reshape(c, n)
+count = -1
+for i in range(0, ilim):
+    for j in range(0, jlim):
+        count += 1
+        fig = plt.figure()
+        ax = plt.axes(projection='3d')
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        for m in range(0, s):
+            setobject(bodies[m].vec_p)
+        for k in (s, c+s-1):
+            setobject(bodies[k].vec_p, 'blue', 10)
+            v0 = bodies[k].vec_v
+            r0 = bodies[k].vec_p
+            x[k-s][count] = r0[0]
+            y[k-s][count] = r0[1]
+            z[k-s][count] = r0[2]
+            bodies[k].vec_v += dt * bodies[k].gravitate(bodies)
+            bodies[k].vec_p += bodies[k].vec_v * dt + (bodies[k].vec_v - v0) * dt ** 2 / 2
+            if np.dot(r0, bodies[k].vec_p) == 0:
+                bodies[k].destroy()
+            ax.plot3D(x[k - s][0:count+1], y[k - s][0:count+1], z[k - s][0:count+1])
+
+        angle = 10 + i
+        ax.view_init(40, angle)
+        filename = '/путь/angle-' + str(10*angle+j) + '.png'
+        plt.savefig(fname=filename, dpi=96)
+        plt.gca()
+        plt.close(fig)
