@@ -1,0 +1,75 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from decimal import Decimal, getcontext
+
+getcontext().prec = 8
+
+
+@np.vectorize
+def factorial(x):
+    if x == 0:
+        return Decimal(1)
+    return factorial(x-1) * Decimal(x)
+
+
+def Factorial_D(arr):
+    n = Decimal('1')
+    factorial = np.array([Decimal(1)])
+    for x in arr[1:]:
+        n = n * x
+        factorial = np.append(factorial, n)
+    return factorial
+
+
+def poisson_desribution(lmbd, N):
+    if lmbd < 0:
+        raise ValueError("lambda not negative")
+    numpy_arr_D = np.asarray([Decimal(x) for x in range(N)])
+    P = lmbd ** numpy_arr_D * Decimal(-lmbd).exp() / Factorial_D(numpy_arr_D)
+    return P
+
+
+def initial_Moment(arr, k):
+    if not isinstance(k, int):
+        raise ValueError("k must be integer")
+    elif not isinstance(arr, np.ndarray):
+        raise ValueError("Wrong type of array")
+    return np.sum(arr * np.arange(len(arr)) ** k)
+
+
+def Average(arr):
+    return initial_Moment(arr, 1)
+
+
+def Dispersion(arr):
+    return initial_Moment(arr, 2) - initial_Moment(arr, 1) ** 2
+
+
+def Plot(arr):
+    plt.plot(arr)
+    plt.show()
+
+
+def Compare(x, value, error=0.001):
+    if abs(x-value) <= error:
+        return "matches within the error " + str(error)
+    return "not matches within the error " + str(error)
+
+
+if __name__ == '__main__':
+    print("Enter lambda: ")
+    lmbd = 50
+    # also we can use: lmbd = int(input())
+    print("Enter N: ")
+    N = 100
+    # also we can use: N = int(input())
+    print("Enter k: ")
+    k = 2
+    # also we can use: k = int(input())
+    arr = poisson_desribution(lmbd, N)
+    Plot(arr)
+    print("Initial Moment for k =", k, "is: ", initial_Moment(arr, k))
+    print("Average is: ", Average(arr), "and it is",
+          Compare(Average(arr), lmbd), "with real value", lmbd)
+    print("Disrepsion is: ", Dispersion(arr), "and it is",
+          Compare(Dispersion(arr), lmbd), "with real value", lmbd)
