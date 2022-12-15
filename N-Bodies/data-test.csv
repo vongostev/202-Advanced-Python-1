@@ -1,0 +1,9 @@
+Step time,End time
+0.1,12.5
+Name,Mass,Collsion radius,Activation time,r1,r2,r3,v1,v2,v3
+Nirn,1,1,0,0,0,0,0,0,0
+Alduin,1,1,3,0,0,1,0,0,0
+Magnus,0,1,3.5,5,5,5,-1,-1,-1
+Medid-Nuda,0,1,3.5,-5,-5,-5,1,1,1
+Akatosh,1000,3,8.5,0,0,0,0,0,0
+Lorkhan,1,0.1,8.5,10,10,10,0,0,0
