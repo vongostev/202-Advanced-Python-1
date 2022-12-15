@@ -1,34 +1,75 @@
-way="C:/Users/user/Desktop/log.txt"
-def readtype(line):
-    typ = line[(line.find('[') + 1):(line.find(']'))]
-    return typ
-def readmodule(line):
-    module = line[(line.find('- ') + 2):(line.find('[') - 1)]
-    return module
-def readmode(line):
-    amount = line[(line.find('Found ') + 6):(line.find('modes') - 1)]
-    return amount
-with open(way, "r") as f:
-    d = {}
-    g = ['DEBUG', 'INFO', 'WARNING', 'ERROR']
-    count = 0
-    modes = []
-    for line in f: #пробегаюсь по строчкам текста
-        if '- ' in line: #обрабатываю строки с -
-            module = readmodule(line)   #модуль code.pyMMf
-            typ = readtype(line) # тип модулч
-            if module not in d: #заносим модуль
-                d.setdefault(module, {'DEBUG': 0, 'INFO': 0, 'WARNING': 0, 'ERROR': 0})
-                #print('\n')
-            for i in g:
-                if i in typ:
-                    d[module][i] += 1
-        if 'fun: ' in line:
-            count += 1
-        if 'modes' in line:
-            modes.append(line[(line.find('Found ') + 6):(line.find(' modes'))])
+import numpy as np
+import scipy.special as sci
+from decimal import Decimal, getcontext
+import matplotlib.pyplot as plt
+
+getcontext().prec = 4
 
 
-    print(d)
-    print(count)
-    print(modes)
+def toDecimalArray(arr_):
+    return np.asarray([Decimal(x) for x in arr_])
+
+
+def poisson(L, n):
+    if L < 0:
+        raise ValueError('L меньше 0')
+    L_ = Decimal(L)
+    npArr = toDecimalArray(sci.factorial(np.array(n, dtype=np.int64)))
+    return toDecimalArray(np.power(L_, n)) * np.exp(-L_) / npArr
+
+
+def Moment(n, p, k):
+    if type(n) != np.ndarray or type(k) != int:
+        raise ValueError('n must be array and k must be int')
+    return np.sum(toDecimalArray(np.power(n, k) * p))
+
+
+def Mean(n, p):
+    Mean = Moment(n, p, 1)
+    return Mean
+
+
+def Variance(n, p):
+    item = n - Mean(n, p)
+    Variance = (Moment(item, p, 2))
+    return Decimal(Variance)
+
+
+def Compare(x, L, error):
+    if abs(x - L) < error:
+        print('exceed')
+    else:
+        print('not exceed')
+
+
+if __name__ == '__main__':
+    print('L is ')
+    # L=int(input())
+    L = 50
+    print(L)
+    print('N is ')
+    # N=int(input())
+    N = 100
+    print(N)
+    print('Enter k: ')
+    # k = int(input())
+    k = 4
+    print('N is ')
+    print(k)
+    n = toDecimalArray(np.arange(0, N + 1, dtype='float64'))
+    p = toDecimalArray(poisson(L, n))
+    print('Moment is: ', Moment(n, p, k))
+    print('Mean is: ', Mean(n, p))
+    print('Variance is: ', Variance(n, p))
+
+    Compare(Mean(n, p), L, 0.0001)
+    Compare(Variance(n, p), L, 0.0001)
+
+    plt.plot(poisson(1, n), color='b')
+    plt.plot(poisson(20, n), color='m')
+    plt.plot(poisson(30, n), color='c')
+    plt.plot(poisson(50, n), color='b')
+    plt.xlabel('$x$')
+    plt.ylabel('$f(x)$')
+    plt.grid(True)
+    plt.show()
