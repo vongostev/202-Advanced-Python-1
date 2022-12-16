@@ -1,0 +1,86 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.special
+import math
+from decimal import Decimal, getcontext
+
+getcontext().prec = 10
+
+
+@np.vectorize
+def factorial(x):
+    return Decimal(scipy.special.factorial(x))
+
+
+def P(n, liambda):
+    if liambda < 0:
+        raise ValueError("liambda < 0")
+    f0 = np.arange(0, n)
+    f1 = liambda**f0
+    f2 = scipy.special.factorial(f0)
+    f3 = math.exp(-liambda)
+    return f1*f3/f2
+
+
+def srnk(k, puasson):
+    if isinstance(puasson, np.ndarray) and isinstance(k, int):
+        arr = np.arange(len(puasson))**k
+        return np.sum(arr*puasson)
+    else:
+        raise ValueError("Ne tot tip")
+
+
+def sigma(puasson):
+    a = (np.arange(len(puasson)) - srnk(1, puasson))**2
+    return np.sum(a*puasson)
+
+
+def dec_P(n, limbda):
+    if limbda < 0:
+        raise ValueError("liambda < 0")
+    arr_fl = np.arange(n, dtype="float64")
+    arr_dec = np.asarray([Decimal(x) for x in arr_fl])
+    l = Decimal(limbda)
+    return (l**arr_dec)*((-l).exp())/factorial(arr_fl)
+
+
+def dec_srnk(k, poisson):
+    if isinstance(poisson, np.ndarray) and isinstance(k, int):
+        arr_fl = np.arange(len(poisson), dtype="float64")
+        arr_dec = np.asarray([Decimal(x) for x in arr_fl])
+        return np.sum((arr_dec**k)*poisson)
+    else:
+        raise ValueError("Ne tot tip")
+
+
+def dec_sigma(poisson):
+    return dec_srnk(2, poisson) - dec_srnk(1, poisson)
+
+def test_fuction(n, liambda, s):
+    dec_poisson = dec_P(n, liambda)
+    poisson = P(n, liambda)
+    dec_sr = dec_srnk(1, dec_poisson)
+    dec_std = dec_sigma(dec_poisson)
+    sr = srnk(1, poisson)
+    std = sigma(poisson)
+    if abs(sr-liambda) < liambda*s and abs(std - liambda) < liambda*s:
+        print(f'Poisson({n},{liambda}): True')
+    else:
+        print(f'Poisson({n},{liambda}): False')
+    if abs(dec_sr-liambda) < liambda*s and abs(dec_std - liambda) < liambda*s:
+        print(f'Dec_Poisson({n},{liambda}): True')
+    else:
+        print(f'Dec_Poisson({n},{liambda}): False')
+    plt.plot(dec_poisson[:100], label = 'Dec_P(n)')
+    plt.plot(poisson[:100], label = "P(n)")
+    plt.title(f'Poisson with limbda = {liambda} and n = {n}')
+    plt.legend()
+    plt.xlabel(r'$n$')
+    plt.ylabel(r'$f(n)$')
+    plt.grid(True)
+    #plt.show()
+
+
+if __name__ == "__main__":
+    for i in range(1, 30, 3):
+        test_fuction(100, i, 0.01)
