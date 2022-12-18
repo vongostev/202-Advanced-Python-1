@@ -1,0 +1,53 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from decimal import Decimal,getcontext
+
+getcontext().prec =10
+        
+def poisson(l, n):
+    l_dec=Decimal(l)
+    if l>0 or n>0 or isinstance(n, int):
+        d = (l**n)*(-l_dec).exp()/fact(n)
+    else:
+        d = 0
+    return d
+
+def fact(n):
+    k = Decimal('1')
+    fact = np.array([1])
+    for i in n[1:]:
+        k *= i
+        fact = np.append(fact, k)
+    return fact
+def distr(l, n):
+    n = np.asarray([Decimal(i) for i in np.arange(0, n+1, dtype='float64')])
+    return poisson(l,n)
+
+def moment(distr, k):
+    if not isinstance(k, int):
+        return 0
+    else:
+        n = np.arange(len(distr))
+        c = distr*n**k
+        return c.sum()
+def av(distr):
+    return moment(distr,1,)
+
+def disp(distr):
+    n = np.arange(len(distr))
+    return (distr*(n-av(distr))**2).sum()
+
+def function_to_test(l, n, d):
+    dist = distr(l, n)
+    aver = av(dist)
+    disper = disp(dist)
+    if abs(aver-l) < l*d and abs(disper-l) < l*d:
+        return True
+    else:
+        return False
+if __name__ == '__main__':
+    assert function_to_test(500, 10000, 0.01) == True
+    assert function_to_test(1000, 10000, 0.01) == True
+    assert function_to_test(8, 110, 0.01) == True
+    plt.plot(distr(250,1000))
+    plt.show()

@@ -1,0 +1,42 @@
+import numpy as np
+import scipy.special
+import matplotlib.pyplot as plt
+
+def poisson(l, n):
+    if not(l>0 or n>0 or isinstance(n, int)):
+        d = 0
+    else:
+        d = ((l**n)*np.exp(-l))/scipy.special.factorial(n)
+    return d
+def distr(l, n):
+    a = np.arange(n+1)
+    return poisson(l,a)
+
+def moment(distr, k):
+    if not isinstance(k, int):
+        return 0
+    else:
+        n = np.arange(len(distr))
+        c = distr*n**k
+        return c.sum()
+def av(distr):
+    return moment(distr,1,)
+
+def disp(distr):
+    n = np.arange(len(distr))
+    return (distr*(n-av(distr))**2).sum()
+
+def function_to_test(l, n, d):
+    dist = distr(l, n)
+    aver = av(dist)
+    disper = disp(dist)
+    if abs(aver-l) < l*d and abs(disper-l) < l*d:
+        return True
+    else:
+        return False
+if __name__ == '__main__':
+    assert function_to_test(5, 100, 0.01) == True
+    assert function_to_test(6, 100, 0.01) == True
+    assert function_to_test(8, 110, 0.01) == True
+    plt.plot(distr(6,100))
+    plt.show()
