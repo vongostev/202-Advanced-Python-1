@@ -6,9 +6,6 @@ from decimal import Decimal, getcontext
 
 getcontext().prec = 10
 
-@np.vectorize
-def dec_factorial(x):
-    return Decimal(sci.factorial(x))
 
 def p(n, la):
     if la < 0:
@@ -26,6 +23,10 @@ def m(k, puasson):
 
 def sigma(poisson):
     return m(2, poisson) - m(1, poisson) ** 2
+
+@np.vectorize
+def dec_factorial(x):
+    return Decimal(sci.factorial(x))
 
 
 def dec_p(n, la):
