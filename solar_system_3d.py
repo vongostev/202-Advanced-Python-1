@@ -10,6 +10,69 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import itertools
+class Vector:
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+    def __repr__(self):
+        return f"Vector({self.x}, {self.y}, {self.z})"
+    def __str__(self):
+        return f"{self.x}i + {self.y}j + {self.z}k"
+    def __getitem__(self, item):
+        if item == 0:
+            return self.x
+        elif item == 1:
+            return self.y
+        elif item == 2:
+            return self.z
+        else:
+            raise IndexError("There are only three elements in the vector")
+    def __add__(self, other):
+        return Vector(
+            self.x + other.x,
+            self.y + other.y,
+            self.z + other.z,
+        )
+    def __sub__(self, other):
+        return Vector(
+            self.x - other.x,
+            self.y - other.y,
+            self.z - other.z,
+        )
+    def __mul__(self, other):
+        if isinstance(other, Vector):  
+            return (
+                self.x * other.x
+                + self.y * other.y
+                + self.z * other.z
+            )
+        elif isinstance(other, (int, float)):  
+            return Vector(
+                self.x * other,
+                self.y * other,
+                self.z * other,
+            )
+        else:
+            raise TypeError("operand must be Vector, int, or float")
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            return Vector(
+                self.x / other,
+                self.y / other,
+                self.z / other,
+            )
+        else:
+            raise TypeError("operand must be int or float")
+    def get_magnitude(self):
+        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
+    def normalize(self):
+        magnitude = self.get_magnitude()
+        return Vector(
+            self.x / magnitude,
+            self.y / magnitude,
+            self.z / magnitude,
+        )
 
 class SolarSystem:
     def __init__(self, size):
@@ -61,7 +124,7 @@ class SpaceBody:
         self.solar_system = solar_system
         self.mass = mass
         self.position = position
-        self.velocity = velocity
+        self.velocity = Vector(*velocity)
         self.display_size = max(
             math.log(self.mass, self.display_log_base),
             self.min_display_size,
@@ -113,13 +176,9 @@ class Planet(SpaceBody):
         super(Planet, self).__init__(solar_system, mass, position, velocity)
         self.colour = next(Planet.colours)
         
-solar_system = SolarSystem(400)
-body = SpaceBody(solar_system, 100, velocity=(1, 1, 1))
 
-for _ in range(100):
-    solar_system.update_all()
-    solar_system.draw_all()
-    
+        
+solar_system = SolarSystem(400)
 sun = Sun(solar_system)
 planets = (
     Planet(
@@ -134,10 +193,7 @@ planets = (
         velocity=(5, 0, 0)
     )
 )
-for _ in range(100):
-   
+while True:
     solar_system.calculate_all_body_interactions()
     solar_system.update_all()
     solar_system.draw_all()
-        
-        
