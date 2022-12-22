@@ -1,0 +1,24 @@
+def log_processing():
+    with open("log.txt", "r") as f:
+        data = {}
+        fun = 0
+        modes = []
+        for line in f:
+            if " - " in line:
+                name_of_module = line[line.find(' - ') + 3:line.find('[') - 1]
+                log_name = {"DEBUG":0, "INFO":0, "WARNING":0, "ERROR":0}
+                if name_of_module not in data:
+                    data.setdefault(name_of_module, log_name)
+                level = line[line.find('[') + 1:line.find(']')]
+                for log in log_name.keys() :
+                    if log in level:
+                        data[name_of_module][log] = data[name_of_module].get(log) + 1
+                if "fun:" in line:
+                    fun+=1
+                if "modes" in line:
+                    modes.append(line[line.find("ound") + 5:line.find(" modes")])
+        print(data)
+        print("fun = ", fun)
+        print("modes: ", modes)
+
+log_processing()
