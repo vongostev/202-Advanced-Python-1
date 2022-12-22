@@ -1,0 +1,72 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+
+
+file = pd.read_csv("Objects.csv")
+file.head()
+
+
+class CosmicBody:
+    def init(self, m=1, r=np.array([0, 0, 0]), v=np.array([0, 0, 0])):
+        self.m = m
+        self.r = r
+        self.v = v
+
+    def step(self, a, dt):
+        self.r = self.r + dt * self.v + a * dt * dt / 2
+        self.v = self.v + a
+
+
+frame = np.array([])
+for i in file.index:
+    body = CosmicBody()
+    body.r = np.array([file["x"][i], file["y"][i], file["z"][i]])
+    body.v = np.array([file["v_x"][i], file["v_y"][i], file["v_z"][i]])
+    body.m = file["mass"][i]
+    frame = np.append(frame, body)
+print(frame)
+
+
+def acceleration(frame):
+    accel = np.array([])
+    for i in frame:
+        frame1 = frame[frame != i]
+        a = np.array([])
+        for j in frame1:
+            rvec = j.r - i.r
+            a = np.append(
+                a, j.m * rvec / ((rvec[0]  2 + rvec[1]  2 + rvec[2]  2)  (3/2)))
+        a = a.reshape(-1, 3)
+        a = np.sum(a, axis=0)
+        accel = np.append(accel, a)
+    return accel.reshape(-1, 3)
+
+
+def show(frame, t, dt):
+    fig = plt.figure(figsize=(7, 7))
+    ax = fig.add_subplot(111, projection='3d')
+    p = 0.1
+    for t0 in tqdm(np.arange(0., t, dt)):
+        accel = acceleration(frame)
+        p += 0.1
+        angle = 60 + 60 * p / t
+        ax.clear()
+        ax.axes.set_xlabel("X")
+        ax.axes.set_ylabel("Y")
+        ax.axes.set_zlabel("Z")
+        ax.axes.set_xlim3d(-30, 30)
+        ax.axes.set_ylim3d(-30, 30)
+        ax.axes.set_zlim3d(-30, 30)
+        for elem in frame:
+            ax.scatter(elem.r[0], elem.r[1], elem.r[2], s=20)
+            elem.step(accel[frame == elem][0], dt)
+        ax.view_init(angle-60, angle)
+        fig.canvas.draw()
+
+
+if name == 'main':
+    t = 10
+    dt = 0.1
+    show(frame, t, dt)
