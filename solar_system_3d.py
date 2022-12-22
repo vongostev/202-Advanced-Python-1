@@ -145,9 +145,10 @@ class SpaceBody:
             color=self.colour
         )
     def accelerate_due_to_gravity(self, other):
-        distance = other.position - self.position
+        distance = Vector(*other.position) - Vector(*self.position)
         distance_mag = distance.get_magnitude()
         force_mag = self.mass * other.mass / (distance_mag ** 2)
+        
         force = distance.normalize() * force_mag
         reverse = 1
         for body in self, other:
