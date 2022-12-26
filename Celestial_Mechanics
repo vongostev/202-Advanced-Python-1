@@ -24,8 +24,7 @@ class CosmicBody:
         self.mass = mass
         self.vec_v = vec_v
         self.vec_p = vec_p
-        self.destroyed = False                  
-        self.trace = []
+        self.destroyed = False
         self.x_cor.append(self.vec_p[0])
         self.y_cor.append(self.vec_p[1])
         self.z_cor.append(self.vec_p[2])
@@ -44,7 +43,6 @@ class CosmicBody:
 
     def step(self, dt):
         self.vec_p += self.vec_v * dt
-        self.trace.append(self.vec_p)
         self.x_cor.append(self.vec_p[0])
         self.y_cor.append(self.vec_p[1])
         self.z_cor.append(self.vec_p[2])
