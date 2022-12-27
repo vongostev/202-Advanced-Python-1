@@ -1,0 +1,104 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+import time
+from tqdm import tqdm
+
+G = 6.7e-2
+zerovec = np.array([0, 0, 0], dtype='float')
+
+
+class Star:
+    def __init__(self, mass, vec_p):
+        self.mass = mass
+        self.destroyed = False              
+        self.vec_p = vec_p
+
+
+class CosmicBody:
+    x_cor = []
+    y_cor = []
+    z_cor = []
+
+    def __init__(self, mass, vec_v, vec_p):
+        self.mass = mass
+        self.vec_v = vec_v
+        self.vec_p = vec_p
+        self.destroyed = False
+        self.x_cor.append(self.vec_p[0])
+        self.y_cor.append(self.vec_p[1])
+        self.z_cor.append(self.vec_p[2])
+
+    def gravitate(self, bodys):
+        dv = 0
+        for body in bodys:
+            if body.destroyed == False and body != self:
+                r = - self.vec_p + body.vec_p
+                dv += G * body.mass * dt * r / math.pow(np.linalg.norm(r), 3)
+                self.vec_v += dv
+
+    def destroy(self):
+        self.destroyed = True
+        raise Exception('game over')
+
+    def step(self, dt):
+        self.vec_p += self.vec_v * dt
+        self.x_cor.append(self.vec_p[0])
+        self.y_cor.append(self.vec_p[1])
+        self.z_cor.append(self.vec_p[2])
+
+
+star = Star(10000, zerovec)
+body1 = CosmicBody(1000, np.array([-5., 0., 0.]), np.array([-4., 4., 4.]))
+body2 = CosmicBody(1000, np.array([-4., 0., 0.]), np.array([6., 10., 0.]))
+body3 = CosmicBody(10, np.array([5., 10., 5.]), np.array([5., 0., 0.]))
+bodys = [body1, body2, body3]
+stars = [star]
+
+%matplotlib notebook
+fig = plt.figure(figsize=(5, 5))
+ax = fig.add_subplot(111, projection='3d')
+ax.axes.set_xlim3d(-11, 11)
+ax.axes.set_ylim3d(-5, 10)
+ax.axes.set_zlim3d(-8, 8)
+fig.show()
+fig.canvas.draw()
+
+dt = 0.05
+t0 = 6
+
+for t in tqdm(np.arange(0., t0, dt)):
+    for body in bodys:
+        if body.destroyed == False:
+            body.gravitate(stars)
+            body.gravitate(bodys)
+
+    bodys_destroying = []
+
+    for main_body in bodys:
+        if main_body.destroyed == False:
+            for body in bodys:
+                if body != main_body:
+                    if body.destroyed == False:
+                        if np.linalg.norm(main_body.vec_p - body.vec_p) < 0.5:
+                            bodys_destroying.append(body)
+                            break
+
+    for body in bodys_destroying:
+        body.destroy()
+
+    for body in bodys:
+        if body.destroyed == False:
+            body.step(dt)
+
+    ax.clear()
+    ax.axes.set_xlim3d(-11, 11)
+    ax.axes.set_ylim3d(-5, 10)
+    ax.axes.set_zlim3d(-8, 8)
+    ax.scatter(0, 0, 0, s=100)
+
+    for body in bodys:
+        if body.destroyed == False:
+            ax.scatter(body.x_cor, body.y_cor, body.z_cor,
+                       color='green', marker='o')
+            fig.canvas.draw()
