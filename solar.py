@@ -136,11 +136,13 @@ t0=4
 dt=0.01
 
 for t in tqdm(np.arange(0.,t0,dt)):
-    solar_system.ax.set_xlim3d(-200,200)
-    solar_system.ax.set_ylim3d(-200,200)
-    solar_system.ax.set_zlim3d(-200,200)
+    angle = 60 + 60 * t / t0
     solar_system.draw_all()
     solar_system.calculate_all_body_interactions()
     solar_system.update_all()
+    solar_system.ax.set_xlim3d(-200,200)
+    solar_system.ax.set_ylim3d(-200,200)
+    solar_system.ax.set_zlim3d(-200,200)
     solar_system.fig.canvas.draw()
+    solar_system.ax.view_init(30 - angle * 0.2, angle)
     
