@@ -56,8 +56,8 @@ class SpaceBody:
         self,
         solar_system,
         mass,
-        position=([0, 0, 0]),
-        velocity=([0, 0, 0]),
+        position=np.array([0, 0, 0]),
+        velocity=np.array([0, 0, 0]),
     ):
         self.solar_system = solar_system
         self.mass = mass
@@ -79,27 +79,27 @@ class SpaceBody:
         self.solar_system.ax.plot(
             *self.position,
             marker="o",
-            markersize=self.display_size + self.position[0] / 30,
+            markersize=self.display_size,
             color=self.colour
         )
         
     def accelerate_due_to_gravity(self, other):
-        distance = other.position - self.position
+        distance = np.array(other.position) - np.array(self.position)
         distance_mag = np.linalg.norm(distance)
         force_mag = self.mass * other.mass / (distance_mag ** 2)
-        force = distance.normalize() * force_mag
-        reverse = 1
+        force = distance * force_mag/distance_mag
+        reverse = 1.
         for body in self, other:
             acceleration = force / body.mass
-            body.velocity += acceleration * reverse
-            reverse = -1
+            body.velocity =body.velocity + acceleration * reverse
+            reverse = -1.
 class Sun(SpaceBody):
     def __init__(
         self,
         solar_system,
         mass=10000,
-        position=(0, 0, 0),
-        velocity=(0, 0, 0),
+        position=np.array([0, 0, 0]),
+        velocity=np.array([0, 0, 0]),
     ):
         super(Sun, self).__init__(solar_system, mass, position, velocity)
         self.colour = "yellow"
@@ -109,8 +109,8 @@ class Planet(SpaceBody):
         self,
         solar_system,
         mass=10,
-        position=(0, 0, 0),
-        velocity=(0, 0, 0),
+        position=np.array([0, 0, 0]),
+        velocity=np.array([0, 0, 0]),
     ):
         super(Planet, self).__init__(solar_system, mass, position, velocity)
         self.colour = next(Planet.colours)
@@ -123,7 +123,7 @@ planets = (
     Planet(
         solar_system,
         position=(150, 50, 0),
-        velocity=(0, 1, 1),
+        velocity=(0, 5, 5),
     ),
     Planet(
         solar_system,
@@ -140,5 +140,7 @@ for t in tqdm(np.arange(0.,t0,dt)):
     solar_system.ax.set_ylim3d(-200,200)
     solar_system.ax.set_zlim3d(-200,200)
     solar_system.draw_all()
+    solar_system.calculate_all_body_interactions()
     solar_system.update_all()
     solar_system.fig.canvas.draw()
+    
