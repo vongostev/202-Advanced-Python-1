@@ -1,0 +1,83 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+G = 6.67 * 10
+dt = 0.01
+time = 10
+steps = int(time / dt)
+FPS = 50
+
+class space_object():
+    def __init__(self, mass: float, radius_vector: np.array, velocity: np.array, size=1, color='black'):
+        self.mass = mass
+        self.radius_vector = radius_vector
+        self.size = size
+        self.color = color
+        self.velocity = velocity
+        self.acceleration = 0
+
+    def update_radius_vector(self):
+        self.radius_vector = self.radius_vector + dt * self.velocity + dt * dt * self.acceleration / 2
+        self.acceleration = 0
+    def update_velocity(self):
+        self.velocity = self.velocity + self.acceleration * dt
+
+    def update_acceleration(self, body):
+        R=body.radius_vector - self.radius_vector
+        self.acceleration = ((G * body.mass * R))/ pow(np.dot(R,R), 3 / 2)
+    def iteration(self, space_objects):
+        for space_object in space_objects:
+            if space_object == self:
+                continue
+            self.update_acceleration(space_object)
+        self.update_velocity()
+        self.update_radius_vector()
+        return self.radius_vector
+
+
+def create_2space_objects():
+    small_object = space_object(0.001, np.array([0., 0., 20.]), np.array([0., 70., 0.]))
+    big_object = space_object(1000, np.array([0., 0., 0.]), np.array([0., 0., 0.]))
+    space_objects = [small_object, big_object]
+    return space_objects
+def create_3space_objects():
+    small_object1 = space_object(0.1, np.array([0., 0., 20.]), np.array([0., 750., 0.]))
+    small_object2 = space_object(0.1, np.array([0., 20., 0.]), np.array([750., 0., 0.]))
+    big_object = space_object(100000, np.array([0., 0., 0.]), np.array([0., 0., 0.]))
+    space_objects = [small_object1,small_object2, big_object]
+    return space_objects
+
+def next_step(space_objects, number_of_objects):
+    walks = np.array([0.] * number_of_objects * steps * 3).reshape(number_of_objects, steps, 3)
+
+    for i in range(steps):
+        for space_object in space_objects:
+            coordinates = space_object.iteration(space_objects)
+            walks[space_objects.index(space_object)][i] = coordinates
+    return walks
+
+def update_lines(num, walks, lines):
+    for line, walk in zip(lines, walks):
+        line.set_data(walk[:num, :2].T)
+        line.set_3d_properties(walk[:num, 2])
+    return lines
+
+
+
+if __name__ == '__main__':
+    objects = create_2space_objects()
+
+    number_of_objects = len(objects)
+    walks = next_step(objects, number_of_objects)
+    fig = plt.figure()
+    ax =fig.add_subplot(projection="3d")
+    lines = [ax.plot([], [], [])[0] for i in walks]
+
+
+    ax.set(xlim3d=(-50, 50), xlabel='X')
+    ax.set(ylim3d=(-50, 50), ylabel='Y')
+    ax.set(zlim3d=(-50, 50), zlabel='Z')
+    print(walks)
+    ani = animation.FuncAnimation(fig, update_lines, steps, fargs=(walks, lines), interval=1)
+    plt.show()
