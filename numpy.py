@@ -1,56 +1,38 @@
-# -*- coding: utf-8 -*-
-
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.special as sci
 
-
-def Puasson(la, N):
+def Poisson(la, n):
     if la < 0:
-        raise ValueError("Lambda must be positive")
-    numpy_arr = np.arange(N)
+        raise ValueError("invalid λ, please enter λ⩾0")
+    numpy_arr = np.arange(n)
     return la ** numpy_arr * np.exp(-la) / sci.factorial(numpy_arr)
 
-
-def Moment(arr, k=1):
+def Raw_Moment(arr, k):
     if k < 0:
-        raise ValueError('"k" must be positive')
+        raise ValueError('invalid k, please enter k⩾0')
     elif k % 1:
-        raise ValueError('"k" must be integer')
+        raise ValueError('invalid k, please enter integer k')
     elif not isinstance(arr, np.ndarray):
-        raise ValueError('Wrong array format')
+        raise ValueError('invalid array format')
     return np.sum(arr * np.arange(len(arr)) ** k)
 
-
 def Mean(arr):
-    return Moment(arr, 1)
+    return Raw_Moment(arr, 1)
 
+def Dispersion(arr):
+    return Raw_Moment(arr, 2) - Raw_Moment(arr, 1) ** 2
 
-def Diviation(arr):
-    return Moment(arr, 2) - Moment(arr, 1) ** 2
-
-
-def Plotter(arr):
-    plt.plot(arr)
-    plt.show()
-
-
-def Test(x, answer, error=0.1):
+def Test(x, answer, error = 0.5):
     if abs(x - answer) <= error:
-        return "cовпадает в пределах погрешности " + str(error)
-    return "не cовпадает в пределах погрешности " + str(error)
-
+        return "coincides within the error " + str(error)
+    return "doensn't coincide within the error " + str(error)
 
 if __name__ == '__main__':
-    la = 10  # int(input())
-    N = 20  # int(input())
-    k = 2  # int(input())
-    error = 0.1  # float(input())
-    arr = Puasson(la, N)
-    Plotter(arr)
-    print("Начальный момент случайной великичны для k =",
-          k, "равен", Moment(arr, k))
-    print("Среднее значение равно", Mean(arr), "и",
-          Test(Mean(arr), la), "с реальным значением", la)
-    print("Дисперсия случайной величины равна", Diviation(Puasson(la, N)),
-          "и", Test(Diviation(arr), la), "с реальным значением", la)
+    print("please enter λ")
+    la = float(input())
+    print("please enter N")
+    N = float(input())
+    arr = Poisson(la, N)
+    print("mean equals ", Mean(arr), "and ", Test(Mean(arr), la), "with theoretical value ", la)
+    print("dispersion of a distribution equals ", Dispersion(Poisson(la, N)), "and ", Test(Dispersion(arr), la), "with theoretical value ", la)
